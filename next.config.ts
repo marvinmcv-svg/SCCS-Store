@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 90],
     localPatterns: [{ pathname: '/images/**' }, { pathname: '/api/files/**' }, { pathname: '/brand/**' }],
     remotePatterns: process.env.S3_PUBLIC_URL ? [new URL(`${process.env.S3_PUBLIC_URL.replace(/\/$/, '')}/**`)] : [],
   },

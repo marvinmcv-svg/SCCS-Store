@@ -32,6 +32,7 @@ export function ProductCard({
   sizes = '(min-width: 1280px) 24vw, (min-width: 768px) 32vw, 48vw',
   fromLabel,
   className,
+  morph = true,
 }: {
   product: ProductCardData;
   action?: React.ReactNode;
@@ -39,13 +40,15 @@ export function ProductCard({
   sizes?: string;
   fromLabel?: string;
   className?: string;
+  /** Shared-element name must be unique on a page; disable for repeats. */
+  morph?: boolean;
 }) {
   const [first, second] = product.images;
   return (
     <article className={cn('group/card relative', className)}>
       <Link href={`/p/${product.slug}`} className="pressable block outline-none" prefetch>
         <div className="relative aspect-[4/5] overflow-hidden rounded-[3px] bg-bg-subtle">
-          <ViewTransition name={`product-${product.slug}`} share="morph" default="none">
+          <MaybeTransition name={morph ? `product-${product.slug}` : undefined}>
             <div className="absolute inset-0">
               {first ? (
                 <Image
@@ -65,7 +68,7 @@ export function ProductCard({
                 <div className="grid h-full place-items-center t-label text-ink-3">SCCS</div>
               )}
             </div>
-          </ViewTransition>
+          </MaybeTransition>
           {second && (
             <Image
               src={second.url}
@@ -99,5 +102,14 @@ export function ProductCard({
       </Link>
       {action && <div className="absolute top-1 right-1">{action}</div>}
     </article>
+  );
+}
+
+function MaybeTransition({ name, children }: { name?: string; children: React.ReactNode }) {
+  if (!name) return <>{children}</>;
+  return (
+    <ViewTransition name={name} share="morph" default="none">
+      {children}
+    </ViewTransition>
   );
 }

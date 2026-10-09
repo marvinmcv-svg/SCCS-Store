@@ -32,8 +32,6 @@ export default async function Inventory({ params, searchParams }: { params: Prom
         actions={
           <>
             <ImportCsv />
-            {/* File download from a route handler, not a page. */}
-            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a href="/api/admin/export/inventory" download className="pressable inline-flex h-10 items-center rounded-full px-4 text-[14px] font-medium ring-1 ring-inset ring-line-strong hover:ring-ink">
               {t('common.export')}
             </a>

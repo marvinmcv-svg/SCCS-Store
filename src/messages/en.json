@@ -214,7 +214,8 @@
     "youSave": "You save {amount}",
     "missingSizes": "Pick a size for each piece",
     "for": "For",
-    "includes": "Includes"
+    "includes": "Includes",
+    "savings": "Kit discount"
   },
   "bag": {
     "title": "Bag",

@@ -214,7 +214,8 @@
     "youSave": "Usted ahorra {amount}",
     "missingSizes": "Elija la talla de cada prenda",
     "for": "Para",
-    "includes": "Incluye"
+    "includes": "Incluye",
+    "savings": "Descuento del kit"
   },
   "bag": {
     "title": "Bolsa",

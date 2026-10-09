@@ -494,5 +494,32 @@
   },
   "design": {
     "title": "Sistema de diseño"
+  },
+  "errors": {
+    "UNKNOWN": "Algo salió mal. Intente nuevamente.",
+    "OUT_OF_STOCK": "No hay suficiente stock de esta talla.",
+    "NOT_FOUND": "Ya no está disponible.",
+    "RATE_LIMITED": "Demasiados intentos. Espere un momento.",
+    "UNAUTHENTICATED": "Inicie sesión para continuar.",
+    "FORBIDDEN": "No tiene permiso para hacer esto.",
+    "INVALID": "Revise los datos ingresados.",
+    "PROMO_INVALID": "Código no válido o vencido.",
+    "MISSING_SIZES": "Elija la talla de cada prenda.",
+    "EMAIL_TAKEN": "Ya existe una cuenta con ese correo. Inicie sesión.",
+    "INVALID_CREDENTIALS": "Correo o contraseña incorrectos.",
+    "LIMIT": "Alcanzó el límite permitido.",
+    "SLOT_FULL": "Ese horario se llenó. Elija otro.",
+    "STOCK_CHANGED": "Algunos productos cambiaron de disponibilidad. Revise su bolsa.",
+    "EMPTY_CART": "Su bolsa está vacía.",
+    "METHOD_DISABLED": "Ese método de pago no está disponible.",
+    "FILE_TYPE": "Formato no permitido. Use JPG, PNG, WEBP o PDF.",
+    "FILE_SIZE": "El archivo supera los 5 MB.",
+    "WINDOW_CLOSED": "El plazo para cambios terminó.",
+    "INVALID_STATUS": "Ese cambio de estado no está permitido.",
+    "required": "Este campo es obligatorio",
+    "invalidEmail": "Ingrese un correo válido",
+    "invalidPhone": "Ingrese un celular válido (8 dígitos)",
+    "passwordShort": "La contraseña debe tener al menos 8 caracteres",
+    "emailTaken": "Ya existe una cuenta con ese correo"
   }
 }

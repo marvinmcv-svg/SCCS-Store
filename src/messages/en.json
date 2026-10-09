@@ -494,5 +494,32 @@
   },
   "design": {
     "title": "Design system"
+  },
+  "errors": {
+    "UNKNOWN": "Something went wrong. Please try again.",
+    "OUT_OF_STOCK": "Not enough stock in this size.",
+    "NOT_FOUND": "No longer available.",
+    "RATE_LIMITED": "Too many attempts. Please wait a moment.",
+    "UNAUTHENTICATED": "Please sign in to continue.",
+    "FORBIDDEN": "You don't have permission to do this.",
+    "INVALID": "Please check the details you entered.",
+    "PROMO_INVALID": "Invalid or expired code.",
+    "MISSING_SIZES": "Pick a size for each piece.",
+    "EMAIL_TAKEN": "An account with that email already exists. Please sign in.",
+    "INVALID_CREDENTIALS": "Wrong email or password.",
+    "LIMIT": "You've reached the limit.",
+    "SLOT_FULL": "That time slot is full. Please pick another.",
+    "STOCK_CHANGED": "Some items changed availability. Please review your bag.",
+    "EMPTY_CART": "Your bag is empty.",
+    "METHOD_DISABLED": "That payment method isn't available.",
+    "FILE_TYPE": "File type not allowed. Use JPG, PNG, WEBP or PDF.",
+    "FILE_SIZE": "The file is larger than 5 MB.",
+    "WINDOW_CLOSED": "The exchange window has closed.",
+    "INVALID_STATUS": "That status change isn't allowed.",
+    "required": "This field is required",
+    "invalidEmail": "Enter a valid email",
+    "invalidPhone": "Enter a valid mobile number (8 digits)",
+    "passwordShort": "Password must be at least 8 characters",
+    "emailTaken": "An account with that email already exists"
   }
 }

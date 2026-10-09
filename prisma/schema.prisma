@@ -1,0 +1,628 @@
+// SCCS Store data model.
+// Money is integer centavos (BOB). Times are UTC; display in America/La_Paz.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Identity ────────────────────────────────────────────────────────────────
+
+enum Role {
+  CUSTOMER
+  STAFF // orders + pickups only
+  ADMIN // everything except users/roles
+  OWNER // everything
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  emailVerified  DateTime?
+  name           String?
+  phone          String?
+  image          String?
+  passwordHash   String?
+  role           Role      @default(CUSTOMER)
+  locale         String    @default("es")
+  notifyEmail    Boolean   @default(true)
+  notifyWhatsapp Boolean   @default(true)
+  disabled       Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  accounts       Account[]
+  sessions       Session[]
+  students       Student[]
+  orders         Order[]
+  carts          Cart[]
+  auditLogs      AuditLog[]      @relation("actor")
+  stockMoves     StockMovement[]
+  notifications  Notification[]
+  reviewedProofs PaymentProof[]  @relation("reviewer")
+}
+
+// Auth.js adapter models
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+enum Fit {
+  UNISEX
+  BOYS
+  GIRLS
+}
+
+/// Students are minors: first name, grade, section, fit and sizes only.
+model Student {
+  id        String   @id @default(cuid())
+  parentId  String
+  parent    User     @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  name      String
+  grade     String // PK, K, 1..12
+  section   String?
+  fit       Fit      @default(UNISEX)
+  /// { [garmentType]: { size: string, updatedAt: ISO string } }
+  sizes     Json     @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+
+  @@index([parentId])
+}
+
+// ─── Catalog ────────────────────────────────────────────────────────────────
+
+model Category {
+  id       String    @id @default(cuid())
+  slug     String    @unique
+  nameEs   String
+  nameEn   String
+  sort     Int       @default(0)
+  products Product[]
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+model Product {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  nameEs        String
+  nameEn        String
+  descEs        String        @default("")
+  descEn        String        @default("")
+  careEs        String        @default("")
+  careEn        String        @default("")
+  categoryId    String
+  category      Category      @relation(fields: [categoryId], references: [id])
+  garmentType   String? // see config/catalog.ts GARMENT_TYPES
+  grades        String[] // empty = all grades
+  fit           Fit           @default(UNISEX)
+  status        ProductStatus @default(DRAFT)
+  featured      Boolean       @default(false)
+  isNew         Boolean       @default(false)
+  isUniform     Boolean       @default(false) // official uniform piece
+  allowPreorder Boolean       @default(false)
+  preorderDate  DateTime?
+  tags          String[]
+  sort          Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  images      ProductImage[]
+  variants    Variant[]
+  bundleItems BundleItem[]
+  favorites   Favorite[]
+  collections CollectionItem[]
+  alerts      StockAlert[]
+
+  @@index([status, categoryId])
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String?
+  blur      String? // tiny base64 placeholder
+  color     String? // optional: image belongs to a colour
+  sort      Int     @default(0)
+
+  @@index([productId])
+}
+
+model Variant {
+  id             String   @id @default(cuid())
+  productId      String
+  product        Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sku            String   @unique
+  size           String
+  sizeSort       Int      @default(0)
+  color          String   @default("Default")
+  colorHex       String   @default("#ffffff")
+  priceCents     Int
+  compareAtCents Int?
+  stock          Int      @default(0)
+  reorderPoint   Int      @default(5)
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+  holds      StockHold[]
+  movements  StockMovement[]
+  alerts     StockAlert[]
+
+  @@index([productId])
+}
+
+model Bundle {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  nameEs      String
+  nameEn      String
+  descEs      String        @default("")
+  descEn      String        @default("")
+  grades      String[]
+  fit         Fit           @default(UNISEX)
+  discountPct Int           @default(10)
+  image       String?
+  imageBlur   String?
+  status      ProductStatus @default(DRAFT)
+  sort        Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  items       BundleItem[]
+}
+
+model BundleItem {
+  id        String  @id @default(cuid())
+  bundleId  String
+  bundle    Bundle  @relation(fields: [bundleId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  qty       Int     @default(1)
+  optional  Boolean @default(false)
+  sort      Int     @default(0)
+
+  @@index([bundleId])
+}
+
+// ─── Cart & stock holds ─────────────────────────────────────────────────────
+
+/// A cart belongs to a user, or to an anonymous browser via `token` cookie.
+model Cart {
+  id        String      @id @default(cuid())
+  token     String      @unique
+  userId    String?
+  user      User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  promoCode String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  items     CartItem[]
+  holds     StockHold[]
+
+  @@index([userId])
+}
+
+model CartItem {
+  id            String   @id @default(cuid())
+  cartId        String
+  cart          Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  variantId     String
+  variant       Variant  @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  qty           Int      @default(1)
+  studentId     String?
+  student       Student? @relation(fields: [studentId], references: [id], onDelete: SetNull)
+  /// Items added together as a bundle share a group id (for the discount).
+  bundleId      String?
+  bundleGroup   String?
+  savedForLater Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  @@index([cartId])
+}
+
+/// 15-minute reservation made when checkout starts. Counted against stock.
+model StockHold {
+  id        String   @id @default(cuid())
+  cartId    String
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  variantId String
+  variant   Variant  @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  qty       Int
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([variantId, expiresAt])
+  @@index([cartId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  ownerKey  String // "u:<userId>" or "c:<cartToken>"
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([ownerKey, productId])
+}
+
+/// Back-in-stock alert.
+model StockAlert {
+  id         String    @id @default(cuid())
+  productId  String
+  product    Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variantId  String?
+  variant    Variant?  @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  email      String
+  locale     String    @default("es")
+  notifiedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@unique([productId, variantId, email])
+}
+
+model PromoCode {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  pct         Int? // percent off subtotal
+  amountCents Int? // or fixed amount
+  active      Boolean   @default(true)
+  expiresAt   DateTime?
+  maxUses     Int?
+  uses        Int       @default(0)
+  createdAt   DateTime  @default(now())
+}
+
+// ─── Orders ─────────────────────────────────────────────────────────────────
+
+enum OrderStatus {
+  RECEIVED
+  PAYMENT_VERIFIED
+  PREPARING
+  READY
+  PICKED_UP
+  CANCELLED
+  EXPIRED
+}
+
+enum PaymentMethod {
+  QR
+  TRANSFER
+  CASH
+  CARD
+}
+
+enum PaymentStatus {
+  PENDING
+  SUBMITTED
+  VERIFIED
+  REJECTED
+  REFUNDED
+}
+
+model Order {
+  id             String        @id @default(cuid())
+  code           String        @unique // human code e.g. SC-7K2Q9
+  userId         String?
+  user           User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  email          String
+  name           String
+  phone          String
+  pickupName     String
+  pickupPhone    String
+  pickupSlotId   String?
+  pickupSlot     PickupSlot?   @relation(fields: [pickupSlotId], references: [id], onDelete: SetNull)
+  status         OrderStatus   @default(RECEIVED)
+  paymentMethod  PaymentMethod
+  paymentStatus  PaymentStatus @default(PENDING)
+  subtotalCents  Int
+  discountCents  Int           @default(0)
+  totalCents     Int
+  promoCode      String?
+  notes          String?
+  locale         String        @default("es")
+  idempotencyKey String        @unique
+  /// Random secret encoded in the pickup QR; never guessable from the code.
+  pickupToken    String        @unique
+  /// Pay-at-school reservation deadline.
+  expiresAt      DateTime?
+  pickedUpAt     DateTime?
+  pickedUpById   String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  items         OrderItem[]
+  events        OrderEvent[]
+  proofs        PaymentProof[]
+  notifications Notification[]
+
+  @@index([status, createdAt])
+  @@index([userId])
+  @@index([email])
+}
+
+model OrderItem {
+  id             String            @id @default(cuid())
+  orderId        String
+  order          Order             @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variantId      String?
+  variant        Variant?          @relation(fields: [variantId], references: [id], onDelete: SetNull)
+  productId      String
+  productName    String
+  productSlug    String
+  garmentType    String?
+  image          String?
+  sku            String
+  size           String
+  color          String
+  qty            Int
+  unitPriceCents Int
+  discountCents  Int               @default(0) // line discount (bundle)
+  studentId      String?
+  student        Student?          @relation(fields: [studentId], references: [id], onDelete: SetNull)
+  studentName    String?
+  studentGrade   String?
+  bundleId       String?
+  bundleName     String?
+  preorder       Boolean           @default(false)
+  exchanges      ExchangeRequest[]
+
+  @@index([orderId])
+}
+
+model OrderEvent {
+  id        String       @id @default(cuid())
+  orderId   String
+  order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    OrderStatus?
+  type      String // status | payment | note | notification | pickup
+  note      String?
+  actorId   String?
+  createdAt DateTime     @default(now())
+
+  @@index([orderId])
+}
+
+enum ProofStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model PaymentProof {
+  id           String      @id @default(cuid())
+  orderId      String
+  order        Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  fileKey      String? // private storage key
+  fileType     String?
+  reference    String?
+  status       ProofStatus @default(PENDING)
+  reviewedById String?
+  reviewedBy   User?       @relation("reviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewedAt   DateTime?
+  note         String?
+  createdAt    DateTime    @default(now())
+
+  @@index([orderId])
+  @@index([status])
+}
+
+model PickupSlot {
+  id        String   @id @default(cuid())
+  startsAt  DateTime
+  endsAt    DateTime
+  capacity  Int
+  booked    Int      @default(0)
+  active    Boolean  @default(true)
+  note      String?
+  createdAt DateTime @default(now())
+  orders    Order[]
+
+  @@index([startsAt])
+}
+
+enum ExchangeStatus {
+  REQUESTED
+  APPROVED
+  REJECTED
+  COMPLETED
+}
+
+model ExchangeRequest {
+  id           String         @id @default(cuid())
+  orderItemId  String
+  orderItem    OrderItem      @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+  reason       String // SIZE | DEFECT | OTHER
+  desiredSize  String?
+  note         String?
+  status       ExchangeStatus @default(REQUESTED)
+  resolution   String?
+  resolvedById String?
+  resolvedAt   DateTime?
+  createdAt    DateTime       @default(now())
+
+  @@index([status])
+}
+
+// ─── Inventory, notifications, audit ────────────────────────────────────────
+
+enum StockReason {
+  PURCHASE // received from supplier
+  SALE
+  ADJUSTMENT
+  RETURN
+  EXCHANGE
+  CANCEL
+  IMPORT
+  DAMAGE
+}
+
+model StockMovement {
+  id         String      @id @default(cuid())
+  variantId  String
+  variant    Variant     @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  delta      Int
+  stockAfter Int
+  reason     StockReason
+  note       String?
+  orderId    String?
+  actorId    String?
+  actor      User?       @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  createdAt  DateTime    @default(now())
+
+  @@index([variantId, createdAt])
+}
+
+enum NotificationChannel {
+  EMAIL
+  WHATSAPP
+}
+
+enum NotificationStatus {
+  QUEUED
+  SENT
+  FAILED
+  LINK // click-to-chat fallback generated, staff sends manually
+  SKIPPED
+}
+
+model Notification {
+  id        String              @id @default(cuid())
+  userId    String?
+  user      User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
+  orderId   String?
+  order     Order?              @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  channel   NotificationChannel
+  to        String
+  template  String
+  status    NotificationStatus  @default(QUEUED)
+  link      String?
+  error     String?
+  createdAt DateTime            @default(now())
+
+  @@index([orderId])
+  @@index([status])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation("actor", fields: [actorId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String
+  entityId  String?
+  meta      Json     @default("{}")
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([createdAt])
+}
+
+// ─── Content & settings ─────────────────────────────────────────────────────
+
+model Banner {
+  id           String   @id @default(cuid())
+  placement    String   @default("home-hero") // home-hero | home-editorial
+  eyebrowEs    String   @default("")
+  eyebrowEn    String   @default("")
+  titleEs      String
+  titleEn      String
+  subtitleEs   String   @default("")
+  subtitleEn   String   @default("")
+  ctaLabelEs   String   @default("")
+  ctaLabelEn   String   @default("")
+  href         String   @default("/shop")
+  imageMobile  String
+  imageDesktop String
+  imageBlur    String?
+  active       Boolean  @default(true)
+  sort         Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Collection {
+  id      String           @id @default(cuid())
+  slug    String           @unique
+  titleEs String
+  titleEn String
+  active  Boolean          @default(true)
+  sort    Int              @default(0)
+  items   CollectionItem[]
+}
+
+model CollectionItem {
+  id           String     @id @default(cuid())
+  collectionId String
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  productId    String
+  product      Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sort         Int        @default(0)
+
+  @@unique([collectionId, productId])
+}
+
+model Announcement {
+  id        String    @id @default(cuid())
+  textEs    String
+  textEn    String
+  href      String?
+  active    Boolean   @default(true)
+  startsAt  DateTime?
+  endsAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+/// Key/value store for settings editable in Admin (bank details, QR image…).
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}

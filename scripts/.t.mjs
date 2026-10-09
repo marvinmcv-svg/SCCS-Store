@@ -1,0 +1,10 @@
+import { chromium } from '@playwright/test';
+const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+const p = await b.newPage();
+await p.goto('http://localhost:3000/login');
+await p.fill('#email', 'familia@example.com');
+await p.fill('#password', 'wrong-password');
+await p.click('button[type=submit]');
+await p.waitForTimeout(2500);
+console.log('url', p.url(), 'alert:', await p.locator('p[role=alert]').allTextContents());
+await b.close();

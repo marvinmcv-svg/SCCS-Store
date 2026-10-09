@@ -13,6 +13,7 @@ import { getOrCreateCart } from '@/lib/cart';
 import { availability } from '@/lib/stock';
 import { getSettings } from '@/lib/settings';
 import { addDays } from '@/lib/dates';
+import { notifyStaff } from '@/lib/notify';
 
 async function loadViewable(code: string, token: string | null | undefined) {
   const order = await db.order.findUnique({ where: { code } });
@@ -54,6 +55,7 @@ export async function submitProof(formData: FormData) {
       db.order.update({ where: { id: order.id }, data: { paymentStatus: 'SUBMITTED' } }),
       db.orderEvent.create({ data: { orderId: order.id, type: 'payment', note: reference ? `proof submitted · ${reference}` : 'proof submitted' } }),
     ]);
+    void notifyStaff(`Comprobante recibido · ${order.code}`, [reference ? `Referencia: ${reference}` : 'Archivo adjunto'], `/admin/orders/${order.id}`);
     revalidatePath('/[locale]/orders/[code]', 'page');
     return null;
   });
@@ -121,6 +123,7 @@ export async function requestExchange(input: z.input<typeof exchangeSchema>) {
     if (item.exchanges.some((e) => e.status === 'REQUESTED' || e.status === 'APPROVED')) throw new ActionError('LIMIT');
     await db.exchangeRequest.create({ data: { orderItemId: item.id, reason: d.reason, desiredSize: d.desiredSize || null, note: d.note || null } });
     await db.orderEvent.create({ data: { orderId: order.id, type: 'note', note: `exchange requested · ${item.productName} ${item.size}${d.desiredSize ? ` → ${d.desiredSize}` : ''}` } });
+    void notifyStaff(`Solicitud de cambio · ${order.code}`, [`${item.productName} ${item.size}${d.desiredSize ? ` → ${d.desiredSize}` : ''}`, d.reason], '/admin/exchanges');
     revalidatePath('/[locale]/orders/[code]', 'page');
     return null;
   });

@@ -6,7 +6,8 @@ import { findCart } from '@/lib/cart';
 import { getCurrentUser } from '@/lib/session';
 import { enforceRateLimit } from '@/lib/rate-limit';
 import { holdCart, createOrderFromCart } from '@/lib/orders';
-import { notifyOrder } from '@/lib/notify';
+import { notifyOrder, notifyStaff } from '@/lib/notify';
+import { formatBs } from '@/lib/money';
 
 /** Called when the checkout page opens (and when the hold timer runs out). */
 export async function startCheckout() {
@@ -65,6 +66,7 @@ export async function placeOrder(input: z.input<typeof schema>) {
     });
     // Fire-and-forget: notifications must never block the confirmation.
     void notifyOrder(order.id, 'order_received');
+    void notifyStaff(`Nuevo pedido ${order.code}`, [`${order.name} · ${formatBs(order.totalCents)} · ${order.paymentMethod}`], `/admin/orders/${order.id}`);
     return { code: order.code, token: order.pickupToken };
   });
 }

@@ -43,10 +43,10 @@ export function StatCard({ label, value, hint, tone }: { label: string; value: R
 }
 
 /** Responsive table: scrolls horizontally on phones. */
-export function Table({ children, className }: { children: React.ReactNode; className?: string }) {
+export function Table({ children, className, compact }: { children: React.ReactNode; className?: string; compact?: boolean }) {
   return (
     <div className={cn('-mx-4 overflow-x-auto md:mx-0', className)}>
-      <table className="t-body w-full min-w-[640px] border-collapse">{children}</table>
+      <table className={cn('t-body w-full border-collapse', compact ? 'min-w-0' : 'min-w-[640px]')}>{children}</table>
     </div>
   );
 }

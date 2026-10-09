@@ -90,3 +90,19 @@ export async function notifyBackInStock(productId: string, variantId: string | n
     console.error('[notify] back in stock failed', e);
   }
 }
+
+/** Heads-up to the store inbox (new order, new receipt). Never throws. */
+export async function notifyStaff(subject: string, lines: string[], path: string) {
+  try {
+    const settings = await getSettings();
+    const url = `${siteUrl()}${path}`;
+    await sendEmail({
+      to: settings.store.storeEmail,
+      subject: `[SCCS Store] ${subject}`,
+      text: `${lines.join('\n')}\n\n${url}`,
+      html: emailLayout({ title: subject, body: lines.join('<br/>'), cta: { label: 'Abrir en el portal', url } }),
+    });
+  } catch (e) {
+    console.error('[notify] staff failed', e);
+  }
+}

@@ -405,13 +405,44 @@ async function main() {
     events: [{ status: 'RECEIVED', at: new Date(Date.now() - 20 * 3_600_000) }],
   });
 
+  // Sales history (picked-up orders over the last ~60 days) so reports have data.
+  let rnd = 42;
+  const rand = () => ((rnd = (rnd * 1103515245 + 12345) % 2 ** 31) / 2 ** 31);
+  const histSlugs = ['polo-blanca-manga-corta', 'bermuda-khaki', 'chompa-roja-escudo', 'polera-deporte-blanca', 'short-deporte-rojo', 'pantalon-khaki', 'mochila-sccs', 'botella-acero-jaguars', 'taza-jaguars', 'gorra-sccs', 'hoodie-jaguars', 'estuche-sccs'];
+  const histGrades = ['K', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
+  for (let n = 0; n < 48; n++) {
+    const when = new Date(Date.now() - (2 + Math.floor(rand() * 58)) * day - Math.floor(rand() * 10) * 3_600_000);
+    const grade = histGrades[Math.floor(rand() * histGrades.length)];
+    const lines: Line[] = [];
+    for (let k = 0; k < 1 + Math.floor(rand() * 3); k++) {
+      const slug = histSlugs[Math.floor(rand() * histSlugs.length)];
+      const sizes = PRODUCTS.find((x) => x.slug === slug)!.sizes;
+      const size = sizes[Math.min(sizes.length - 1, Math.floor(rand() * sizes.length))];
+      if (lines.some((l) => l.slug === slug)) continue;
+      lines.push({ slug, size, qty: 1 + Math.floor(rand() * 2), studentName: 'Estudiante', grade });
+    }
+    await order({
+      guest: { name: `Familia ${n + 1}`, email: `familia${n + 1}@example.com`, phone: `7${String(1000000 + n * 7919).slice(0, 7)}` },
+      lines,
+      status: 'PICKED_UP',
+      paymentMethod: (['QR', 'TRANSFER', 'CASH', 'QR'] as const)[n % 4],
+      paymentStatus: 'VERIFIED',
+      createdAt: when,
+      pickedUpAt: new Date(when.getTime() + 2 * day),
+      events: [
+        { status: 'RECEIVED', at: when },
+        { status: 'PICKED_UP', at: new Date(when.getTime() + 2 * day) },
+      ],
+    });
+  }
+
   await db.pickupSlot.update({ where: { id: slots[0].id }, data: { booked: 1 } });
   await db.pickupSlot.update({ where: { id: slots[1].id }, data: { booked: 1 } });
   await db.pickupSlot.update({ where: { id: slots[2].id }, data: { booked: 1 } });
 
   await db.auditLog.create({ data: { actorId: owner.id, action: 'seed', entity: 'system', meta: { products: PRODUCTS.length } } });
 
-  console.log(`✓ ${PRODUCTS.length} products, ${BUNDLES.length} bundles, ${slots.length} pickup slots, 4 users, 2 students, 4 orders`);
+  console.log(`✓ ${PRODUCTS.length} products, ${BUNDLES.length} bundles, ${slots.length} pickup slots, 4 users, 2 students, ${seq} orders`);
   console.log(`  Demo password for all accounts: ${PASSWORD}`);
 }
 

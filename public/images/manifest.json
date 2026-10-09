@@ -1,0 +1,264 @@
+{
+  "products": {
+    "polo": [
+      {
+        "url": "/images/products/polo-1.webp",
+        "blur": "data:image/webp;base64,UklGRsAAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEYAAAABYBRJtpP56US08E38K7rQh5UsApYMEiJiAvg5NHXdBCDrJKnLoN1Wad1acGmRluQAZmnmdpKmu1Ea73qpv3FFjIW7gDEAVlA4IFQAAAAQAgCdASoKAAwAA4BaJaQAD4AQNhQrrYIAAP3ibt1+Vbtcn/XvMJF5/yT+rZKQMTF9tdRANZ2PdlaGY9Fgq25qcxYr+Vd93f6+wMRnpV9qLXwAAAA="
+      },
+      {
+        "url": "/images/products/polo-2.webp",
+        "blur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEcAAAABZ6CgkaTme7HxygrgXwQmIiIbP+HLMgSD2LaiFCAKEYhABCIQwQgWsIMR9t3R08sKEf3Pr+/ewd+D9kZzoZ4oB/KOtCGuCABWUDggNgAAANABAJ0BKgoADAADgFolpAAC3QcHyioAAP73DvOPA+keqwqkaP9JfqJK6Zqt28ts5QrogAAAAA=="
+      }
+    ],
+    "poloLong": [
+      {
+        "url": "/images/products/poloLong-1.webp",
+        "blur": "data:image/webp;base64,UklGRtQAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSFcAAAABYFNbW5uXurWRFZRwUIMIDipQwYmY7BGQMVu23iVExATwc6nbVpdA3m/btvU5mO3WgF0vqwU/LNu2DB5CN2/b3AWIbtq2yUVQYty2USggraSsUm6TBAAAVlA4IFYAAADwAQCdASoKAAwAA4BaJaQAD4uwKxxBy7AA/lvXtS/R+SrHmNexNYwcKX205zStS3qiCn0PU13cQ67U+QJmXtZweXaEZyihgFTK40M73ZIzRWelGUAAAA=="
+      },
+      {
+        "url": "/images/products/poloLong-2.webp",
+        "blur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDsAAAABR6CojRQ4u7ucXyygAXtERHzXXKwbGEWSFOmLBCQgAQkYwAMSeN5sWl8HEf1PrT4/PvSDspEX0kQcCABWUDggNAAAANABAJ0BKgoADAADgFolpAAC3PWLinQAAP73DvOPA+kS8wl2pMFClerWikpkGzR8gbKAAAA="
+      }
+    ],
+    "peTee": [
+      {
+        "url": "/images/products/peTee-1.webp",
+        "blur": "data:image/webp;base64,UklGRsIAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEcAAAABYBTbdpObtspkFQURkTW28IeVLgIeHSRExATwc2hybgIQO0nqIrTbKq1bC64u0lIdwCzN3E7SdDdK410v9TculZLcBYwBAABWUDggVAAAADACAJ0BKgoADAADgFolpAAPgBA2F2cv8xQAAP3ibt1+Vbtcn/XvMJFP59R/VslIGJi+2uof3f7HvIrjgirJr+cgiVmZkI5ifpQUaEC4W+0ycgAAAA=="
+      },
+      {
+        "url": "/images/products/peTee-2.webp",
+        "blur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEYAAAABZ6AQANCmXx6J3flDTCIisvATvkhDMIhtK0oBohCBCEQgAhGMYAE7GGHfHT29rBDR//z67h38PWhvNBfqiXIg70gb4ooAVlA4IDQAAADQAQCdASoKAAwAA4BaJaQAAt0HB8pvAAD+9w5o+2eIofwA4zfR560fsFOSAwYbQEzaiAAA"
+      }
+    ],
+    "dryTee": [
+      {
+        "url": "/images/products/dryTee-1.webp",
+        "blur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEcAAAABYBTbdpObtspkFQURkTW2kIiQLgIeHSRExATwc2hybgIQO0nqIrTbKq1bC64u0lIdwCzN3E7SdDdK410v9TculZLcBYwBAABWUDggPAAAADABAJ0BKgoADAADgFolAACGcAD+80P9Wv2hzTrP1ul3BKv/rjAxDOkIlD3SSP3fkfzMWGPDZaeoHsAAAA=="
+      },
+      {
+        "url": "/images/products/dryTee-2.webp",
+        "blur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEYAAAABZ6AQANCmXx6J3flDTCIisvATvkhDMIhtK0oBohCBCEQgAhGMYAE7GGHfHT29rBDR//z67h38PWhvNBfqiXIg70gb4ooAVlA4ID4AAADwAQCdASoKAAwAA4BaJZACdAERHuiFLWAA/u9RsZwPagaoxGWENnqLi+Gf3d03ogHB+VFXZPyOd6UwlQAAAA=="
+      }
+    ],
+    "peShorts": [
+      {
+        "url": "/images/products/peShorts-1.webp",
+        "blur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEgAAAABd6CgjSQ1eXz3jC5e2kdEAJpcmfVRyv8i1ESyU12ZOg6iITLwgAQkMNjAAjUysED56bARCxH9T8LWBc7PcHeBtyrMkcBcCQFWUDggMgAAABACAJ0BKgoADAADgFolmALsAQtlKDM4cAAA/uv2oK81IU5sCxmWr9hbgHwUTs6SAAAA"
+      },
+      {
+        "url": "/images/products/peShorts-2.webp",
+        "blur": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEUAAAABBka1ts0wNfurqGDn2NGABmMSSRSwn3lleJ+IIJu0MXTrJf4pVKXBOAynxKbYleznarWiFtTsV1G3fU7fNUWcpBmQOgYAVlA4IEoAAADQAQCdASoKAAwAA4BaJbACdAEO/nvVwAD+5SgWw/uKmqp5smtsH1FVF80CyZh1Cf4fzWDmrG18g+Jq/sHyySfoFJ/lvP0cuS9AAA=="
+      }
+    ],
+    "bermuda": [
+      {
+        "url": "/images/products/bermuda-1.webp",
+        "blur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDoAAAABYBMAQBocZj8/lWYVrDIlCODeICImAIx//v/JIOucRcnmnHNbIp0xTibKae1Usl37fm8JpNNEYdITVlA4IDgAAADQAQCdASoKAAwAA4BaJYwC7AEWOYL8AAD9KATzT8mBL3dsfWTxfX9UNb7zLTYAL2wLv4OHJA5AAA=="
+      },
+      {
+        "url": "/images/products/bermuda-2.webp",
+        "blur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDoAAAANYBPZtpMzt/z/k8EINRUGME2NkYyBnB1ExATwsCwWLWhRXeVCIBrLrf3LADMBGAu0ZGBPHelNS/YCVlA4IDwAAADwAQCdASoKAAwAA4BaJYgCdAEO/k5iXgAA4ll6S8LJngAw5oIsL7fiEjUwbQrwmsHsZUl7lqkyMtWEAAA="
+      }
+    ],
+    "pants": [
+      {
+        "url": "/images/products/pants-1.webp",
+        "blur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEMAAAABYFpbW5v0nkgckqVwyJR5GYAB8KlPpG8QERMQ/N9PU3+1w36RAWSnjnmhOwm8R5wkziFPCmtRp85obbpTmFVVFgYBAFZQOCBAAAAAsAEAnQEqCgAMAAOAWiUAToAbk6I2AAD6AnyB953tge9ITv8OpAErvynHXshvF23zhRezvBjM32ofkmjpHIEAAA=="
+      },
+      {
+        "url": "/images/products/pants-2.webp",
+        "blur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEYAAAABBqaxbUfpLXVlKAEXicRFxkVG4vYCKIACtq8+NdwXERPAz9BFJETozVXy0uBp9JS9XAxuAaUaXBjUZnAKaBNwYKDZQAJmVlA4IDwAAADwAQCdASoKAAwAA4BaJYgCdAEPBCvCNAAA4llkv8LdgMq2z7ItWQ1XQz6T9YHbFC+52IPsMJyTHMCrAAA="
+      }
+    ],
+    "sweater": [
+      {
+        "url": "/images/products/sweater-1.webp",
+        "blur": "data:image/webp;base64,UklGRsoAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSFgAAAABYNvaVpvr2FE6tIhFENMwBGIKpkAexr0HcOnOXc4jRMQE8HOpq0qXQN5v27b1OZjt1oBdL6sFPyzbtgweQjdv29wFiG7atslFUO24bWOrgFRIKVJukwQAVlA4IEwAAAAQAgCdASoKAAwAA4BaJbACdAELZSoJu9CAAP7uxQEcwhQN/VeKRwPP8yF1LUwx/VTtNHiIks3gpiEsf5G26Ib8jfxgkDOJ9i3DEEAA"
+      },
+      {
+        "url": "/images/products/sweater-2.webp",
+        "blur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDsAAAABR6CojRQ4u7ucXzRgAXtERHzXnK8bGEWSFOmLBCQgAQkYwAMSeN5sWl8HEf1PrT4/PvSDspEX0kQcCABWUDggPAAAANABAJ0BKgoADAADgFolqAJ0AN0oLrLAAP7ZU/AzwxReLjEqszb86PhvdVZ3kx6K1/+JBX9Dn+BVZAAAAA=="
+      }
+    ],
+    "jacket": [
+      {
+        "url": "/images/products/jacket-1.webp",
+        "blur": "data:image/webp;base64,UklGRsoAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSFcAAAABYBrbVpyb1eGxUAooOqEIhiqogkkx8SkgMi5u30uIiAng59Y6Z1ug7rdt2/oazHZrwK+X1UMclm1bhgipm7dt7hLkMG3bFDJoOW7bKDVQCqVEyW1RAAAAVlA4IEwAAAAQAgCdASoKAAwAA4BaJbACdAELZR3LHnPwAP7sJ0D/Ew9C081bVHF6dIlR/z6FTNgHBgbNzkDj3vk/7unQxfqL3selPcT7FuGIIAAA"
+      },
+      {
+        "url": "/images/products/jacket-2.webp",
+        "blur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDUAAAABN6CmkRQ4e3e8LTposUdExHfNrUExJEnSbxAGYRAWYRH2fae/xhpE9D99PoyLftA2aiEnAgBWUDggPAAAANABAJ0BKgoADAADgFolqAJ0AN0oLopAAP7ZQxdEX5wF8BxhXsCDII54wqWPkx6K1/+JBX9Dn9bc8AAAAA=="
+      }
+    ],
+    "sweatsuit": [
+      {
+        "url": "/images/products/sweatsuit-1.webp",
+        "blur": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSGAAAAABcBvbtqrc+dH/SEbqbqFbyhCRETHUQg/QAOmvgA6sCXdLXTbyhhoiYgLk35AzoSu6wCHww2/z5wpcOz9DYLgwTa+0X9ACKpI6Q+N4oipavJS0T0fURLnuUVdlC2WHSglWUDggSAAAAJABAJ0BKgoADAADgFolsALDsNV4gAD+6VwYbYwTaGdWstCm+t+sVRAalmEsmQOzvCoHZFsWjTK+B1M/uTslKNBnNZi0ukAAAA=="
+      },
+      {
+        "url": "/images/products/sweatsuit-2.webp",
+        "blur": "data:image/webp;base64,UklGRsIAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSFIAAAABcJJt21P9rARUoQMV0ATYy6G4cFRA4glBgakpsI7/uR7z/ydDREwAAI8jhFDg/RGoJESqBVrVIJmzNAP6A2036ppaV/vAB5C4B1wSvlBMcP4AVlA4IEoAAADwAQCdASoKAAwAA4BaJbACdADdSOV5oAAA/qEAq3DFN7iLCJvRjsh9TEHGrJEBnmlFyrmEcVJXNrl1/qsAJWttm4r8fz7sV/AAAA=="
+      }
+    ],
+    "hoodie": [
+      {
+        "url": "/images/products/hoodie-1.webp",
+        "blur": "data:image/webp;base64,UklGRroAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSFUAAAABYBLbtpX9vu75ZyEKYRgq/FOQgiEMBcAicTjmmDdkiIgJ4L/te1uIrdRGwB+SdHhoVGygK3WwXJ/0nQus+yu9+wrb9EjPtEGdb+nONWBTVSVL0RgAAFZQOCA+AAAA0AEAnQEqCgAMAAOAWiUAAF7T756SsAAA/vR47UQSkPikUAbLay/emg2He52NpiGMOIMzm0/3CpTTtwIUPAA="
+      },
+      {
+        "url": "/images/products/hoodie-2.webp",
+        "blur": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDQAAAABP6CmkRQ4e3e8LT1eUEZExHfN5RKKIUmSnoMwCIOwCKtzb/o/1yCi/+nzwUXfaAs1kQMBVlA4IDYAAADQAQCdASoKAAwAA4BaJZACdAEOtWdYAAD+8NRZhC7wQ1Q9rhfqBR4kNEGQ36h73Sfqf5duAAA="
+      }
+    ],
+    "backpack": [
+      {
+        "url": "/images/products/backpack-1.webp",
+        "blur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSFIAAAABd6AmkqTo3ugHIkI8IAL/ljAREQl41q77TD+BVW3bNqb3+08CCVQQQgXfIogggggiiCDJSXFDRPQ/pQvWo+CMhita7uh4oueNgS9G/pjY9lkCVlA4IC4AAADQAQCdASoKAAwAA4BaJYwAAtz/hKsxgAD+8qUrlfOt5DN0x1BkYM28Nlp6ZoAA"
+      },
+      {
+        "url": "/images/products/backpack-2.webp",
+        "blur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEoAAAABb6CgjRTmB0MHAvCH/wQPEZGzna8uwBC27TgCUQhCEIIQhCAUoQhFKEIRNoV9neMV0f9YEFbEDWlHPlBO1AvNjfZB96L/MPwYAVZQOCA2AAAAsAEAnQEqCgAMAAOAWiWQAALnVOwYAAD+80pDruziWVvytnDhboTjOash+Hyr/natj7O4EAAA"
+      }
+    ],
+    "backpackSmall": [
+      {
+        "url": "/images/products/backpackSmall-1.webp",
+        "blur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEYAAAABX6CobSM22t4CcBhO91wREajO9XCVeTCKJLtKJ+F7xAESkIAEJCABGRzRgYX1Fw0R/U/dDftfOTNwZeTOxJOZLyvH2/QAVlA4ICgAAAAwAQCdASoKAAwAA4BaJZQAA3AA/vP0/qF0KRVF0ryOcLiDAp+iAAAA"
+      },
+      {
+        "url": "/images/products/backpackSmall-2.webp",
+        "blur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSFIAAAABf6A2kg3q+UvlRiFS/VeliYhI9NSmmdufg1Vt2zbu9X5++9VBARFEEIEGIogggggiaKKBWSOi/xH2aQjj70tmZAvyFcWG8kB1or7Q3GgfdC96VlA4IC4AAADQAQCdASoKAAwAA4BaJYgAAtz/WyAwgAD+8ropeQ6+p7Z6W1Em+ex/3PEvKwAA"
+      }
+    ],
+    "lunchBag": [
+      {
+        "url": "/images/products/lunchBag-1.webp",
+        "blur": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSD4AAAABV6CojRRolxtU8MK/Q2xERODHLpyMhaLYVqpbgRUUoAENaEAI90YwhhXM+Y0Q0f8J4H0CuQJMxgeVDtWcLVZQOCAsAAAAMAEAnQEqCgAMAAOAWiWUAANwAP7z9P6JpN4p9OgYEM/kaEJDm5/8L2EFwAA="
+      },
+      {
+        "url": "/images/products/lunchBag-2.webp",
+        "blur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDsAAAABX6AmkhQ2+sEAHRU2UklEBKItvit1QEzbip5FBBlkkEEQ7bP4DBkMw+jNaggi+p880wZBglNodXR/AABWUDggNAAAANABAJ0BKgoADAADgFolkAAC5tDKrqwAAP72wF22Tl1i0wkovfPkAJwnZxW+67As+zsKAAA="
+      }
+    ],
+    "bottle": [
+      {
+        "url": "/images/products/bottle-1.webp",
+        "blur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDwAAAABX6AmABIGItC/GY4Anv5eloiIBNX3ngVC2nZyZzCGKUwhhRRSSCGFFFJINKL/ASj4cOHAhgUTBjTyBQBWUDggMgAAAFABAJ0BKgoADAADgFolnAAEAAAA/vMD/5KY4as528ObbDH9AEG0222yaxsBP8RaoAAA"
+      },
+      {
+        "url": "/images/products/bottle-2.webp",
+        "blur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEsAAAABb6AQAAKkI0sgf6AcIiLh+LbCOW1rU7b/l0IIIYQQQgghhBBCCBNCCvM3rHW9IvofthTsKTlScabmSsOdlicdb3o+Gfhm5JeJf2YAVlA4IDYAAABwAQCdASoKAAwAA4BaJQAAS319fAD+9HCIZM0qvxEOKK74mEobttT5d/lfk5vf5Vlf+6EAAAA="
+      }
+    ],
+    "cap": [
+      {
+        "url": "/images/products/cap-1.webp",
+        "blur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEkAAAABf6CwkaQ0+YK7QwN8RASQ4v6lSd7Nv4ZgU1tbkDsy04AMVKAHAQgBQUhAADsYwgpuHkc2rRDR//RfMO7Asyvv7pxrclyNlKMvAFZQOCAsAAAAMAEAnQEqCgAMAAOAWiWUAANwAP70Zfvxb/4SInguByELJPABWkZGORGVAAA="
+      },
+      {
+        "url": "/images/products/cap-2.webp",
+        "blur": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSFAAAAABf6AokqQ2ejn/DgOYwAERESD6n/ShOxxLCTaxbUd5LtJHRVykigdaNGwuMPBxgAYMoGKvuexYiOh/6uklFX1QDrgNiDsw8teaWddkqR4AAFZQOCA8AAAA8AEAnQEqCgAMAAOAWiWIAAL6qUA8KaAAAP7yzYKgiGoPh2MClnFCGYA2wV8NsTzSLfxQXwnJ6zb8IAAA"
+      }
+    ],
+    "notebook": [
+      {
+        "url": "/images/products/notebook-1.webp",
+        "blur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDkAAAABX6A4kqQ0eoa7f/kRGBERgLr4odU/70JNJCnSqsEDGohQQ4oNMnxg77tzENH/CcDWg4Es+adGaAEAVlA4IDgAAADQAQCdASoKAAwAA4BaJYwAAt0AEauAAAD+6Y8MK10R+RPZPOHzNWXF4qKYSIJzqD2lt9d6KE0AAA=="
+      },
+      {
+        "url": "/images/products/notebook-2.webp",
+        "blur": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSBkAAAABFyAQSIyTHmSNiIgDAgGKwv/hFkT0P8IOAFZQOCBSAAAAEAIAnQEqCgAMAAOAWiWYAnQBEMs5mTqqAAD+7StyHqow54AwnXhddLbXFiaPV6t0dt/nxgggoTOnNjFMsxiEBv/KJwvLdXXtthT9T0l4t+qwAA=="
+      }
+    ],
+    "pencilCase": [
+      {
+        "url": "/images/products/pencilCase-1.webp",
+        "blur": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSDgAAAABP6CQkSQ2d03ji8GTfUQEblOvhWratqLD8Awmg2fQyiGECOr5fzQgRPR/AvjbesCueVg1QFN4BlZQOCAmAAAAMAEAnQEqCgAMAAOAWiWUAANwAP7zuv7yVC/4dxL+K1F6BlX06AA="
+      },
+      {
+        "url": "/images/products/pencilCase-2.webp",
+        "blur": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSCIAAAABFyAQSALbX2uNiAgHBQFANv7rp6SebBEi+j8BsM9Ut34CVlA4IDQAAADQAQCdASoKAAwAA4BaJZgC7AEOunFTAAD+8uZ8/ch0Sq742X4Bc1YdLt889NbiitAIMAAA"
+      }
+    ],
+    "mug": [
+      {
+        "url": "/images/products/mug-1.webp",
+        "blur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEAAAAABYFNbe5MvUrqQOMiUiY6VNrIhoWnAQDY2Nqz0riAiJgB/zvrGO5uXxZmTaVlqqw7jslQxPbhlGTQAkLQsNN4GVlA4IDwAAAAwAgCdASoKAAwAA4BaJaQAD4TwNhLogbqdAAD+w1358jRaH38vNFTWQB0xcQVE6yQzSKK7ffs99XxyAAA="
+      },
+      {
+        "url": "/images/products/mug-2.webp",
+        "blur": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEAAAAANYFpr25IXd4g0ZwKarUNkFzKZMXwcBnBLvkFETAB+9lJDY8+hLws/BkBKOpcvHC5F887O7rrkbsHK3i3cOzUAVlA4IEwAAADQAQCdASoKAAwAA4BaJaQAAhdS+wnoAAD+4jbi3B7ICDXrNoLB3++6lKTRDppwrlI88h9XbD2PBCAV0L+UqH+AihCsd88uAqSodAAA"
+      }
+    ],
+    "keychain": [
+      {
+        "url": "/images/products/keychain-1.webp",
+        "blur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEAAAAABX6CgbRum+xgu8JEdjogI0EeSkNkeWNW2TWt6/csggQgiSCODCiqocPNdGSL6PwGeNxz0m5it/IyW6V+iruARVlA4IEgAAADwAQCdASoKAAwAA4BaJQBOgCHhi9cjbwAA/tk3uirVysasgIYOuu+B6oYBmDSsWlSyFPqycLn+BCZnLnyblVxIQ7yBAAMwAAA="
+      },
+      {
+        "url": "/images/products/keychain-2.webp",
+        "blur": "data:image/webp;base64,UklGRsAAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEYAAAABb6C2kaQ2+v7xZD6nFCIioA+sdrO/NMsHc2zbq9w7KQxgDDOYQApRBBFDCP0PIoEjUAYR/Q9DZ1aZloKG41y5v/3X9W0AVlA4IFQAAAAwAgCdASoKAAwAA4BaJbACdDiAAQtd6YamAAD+wQm9nwn/yzQTnGzPeYcab1j1Q9sWZZ5AiioJ0/ClnPMDRvxez5Onogit4badwTCXEZMe0pETwAA="
+      }
+    ],
+    "tote": [
+      {
+        "url": "/images/products/tote-1.webp",
+        "blur": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSD8AAAABBkaxbTdJtjiIBNgyKIgEetnhALSBvZYq4f6ImACyNwSKSvCY60aMUz+AONaxTuu0zu6IczqHU04bkzigUQAAVlA4IEoAAADwAQCdASoKAAwAA4BaJZwAD4qNVQA/DLAA+wWUb8PxyoO4T7qDSP+GMdMTbq4lu9EbR+YeNoI8ZS9fzeZiyq57MUASHL5mAQAAAA=="
+      },
+      {
+        "url": "/images/products/tote-2.webp",
+        "blur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSD0AAAABV6AmkiQ1eCE+c8g+PiICzKtTfhwVoSCybeq8hwYaaKCBBlpo8GmggwZuVAki+p9UCmQaJDpzrzOepKsfAFZQOCBEAAAA0AEAnQEqCgAMAAOAWiWMAuwA2bpVPyAA9r5n9TAv8oDvXJUeRrjSXlbGEM34/+FJuMoSxBZuXWJrTtA2kuoHrnMkAAA="
+      }
+    ],
+    "plush": [
+      {
+        "url": "/images/products/plush-1.webp",
+        "blur": "data:image/webp;base64,UklGRsQAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEwAAAABf6AgAIAylm17RxERAFL+CI1/mMPrE2BU29qNPfN+NpDDVAU1LE1EoIMCIkghA6NvJkNE/9PfOiVcUXJHxRE5Tyx8sfPGxhkjw9wDVlA4IFIAAABwAgCdASoKAAwAA4BaJbACdDBLyIAL03ggP6gAAMwaGX5w8jPjOX4ub50vlmEt1AzpsmMncTwA9TUuPIzWrSRZ7xhmjMiHPHQa9Cx/gbe2kUAA"
+      },
+      {
+        "url": "/images/products/plush-2.webp",
+        "blur": "data:image/webp;base64,UklGRtgAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEwAAAABd6A4kqQ0eYY7XycwIiJASX/FrfjNQESwiW0rTosGHKABD0hAAg6yaIiDaEgdC2nXdqkyR09E/+Nb3W1CWpBf1AdlRhwRdnQ/NgAAVlA4IGYAAADwAQCdASoKAAwAA4BaJbACdLoAAnAe4IAA4n6HTt+ADVspg6JI3vG8LVrZMdhQboflDEx8qEl8cIkafB/utJFv/TzbfGX1w6cA9dD47GisgUf/i0xGIQ/F8w/ZLm339qUQtjWQAAA="
+      }
+    ],
+    "stickers": [
+      {
+        "url": "/images/products/stickers-1.webp",
+        "blur": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEMAAAANcBvbtlJtInfPqYSUJmiHHi1zOnD9UkJETAB/Fxyv2IE8cyGtAcUAoh4YQiAcgD76NIT/aJZpGmOALlFVUXgc88oTAFZQOCBOAAAA0AEAnQEqCgAMAAOAWiWUAuwA23snLAAA/fvdf1Lj/phesjWY0L4lhBpR0G00pMGtq2BNYlvFEgrtafiWISt6LJWytzUhALMC2MlQAAAA"
+      },
+      {
+        "url": "/images/products/stickers-2.webp",
+        "blur": "data:image/webp;base64,UklGRsIAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSCcAAAABR0CYbeSvuv0O4KYREVE7ijANyco+kyACiCKW/D8jiOh/3nYGyj8AVlA4IHQAAAAwAgCdASoKAAwAA4BaJagCdAELZSkocrQVAAD+mxwGDQsxVWOybpsocAD7GVIbUsq4xqTy9EZg8MAXNtfRynCtAGwrxEdVSR775MIoOs+2F7ue5+LDdui6q0rpaeqzAVpJ/QAKEcZONV00jeahMFC8/0AAAA=="
+      }
+    ],
+    "socks": [
+      {
+        "url": "/images/products/socks-1.webp",
+        "blur": "data:image/webp;base64,UklGRroAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSE8AAAABcBMBAKK8u8vmslmFv19hdGlAAUZCUIGdFj6Sxe1dIkTEBABd9/2ZXXVZ3wdVu22aVG2uaVS1eqda1SJNqao4TadV6v6WLksgRgs9r1QPAFZQOCBEAAAAsAEAnQEqCgAMAAOAWiWkAAL2nGdVqAD3SPXRJGscnx3r6Ej999m/WNGa/D32L1I65BPPG2LdOv3wQJzM96Rp+ToAAAA="
+      },
+      {
+        "url": "/images/products/socks-2.webp",
+        "blur": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEcAAAAJcBrbtuqssCVJ7tv/dVR6xyJimd6TYaYaIiK6Y/3eJNGZzmhpECxvmoWq4951pZLkBczIiN8p4Tv7kxK/24RvxD8Bi/vnAgBWUDggSgAAALABAJ0BKgoADAADgFolnAACW9EHonAA/sqw7Rx859HBT/s+/Enh2xpkV7/fRq2ZYA8UYQXtwzYti/wlx/JDjbcQmVx2syIgIAAA"
+      }
+    ],
+    "duffel": [
+      {
+        "url": "/images/products/duffel-1.webp",
+        "blur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSEQAAAABZ6A0kiQ1eSAZ7DtK6SMigJlm5X6CX6EQsq3qzEN4BMUQRAQpRJBEBjHEkEEXq49CRP8ngO9QDVrJsLVA0tuYHWJyjlZQOCA4AAAAMAEAnQEqCgAMAAOAWiWUAANwAP7zf/9m8f8lgGUAkcgI1WvXtGx0H0tSquCoZ+bJsF32ENFAAAA="
+      },
+      {
+        "url": "/images/products/duffel-2.webp",
+        "blur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4WAoAAAAQAAAACQAACwAAQUxQSD8AAAABX6CobSQ3uM/ed2EckouIAM37Nkh5D6pq24bOGzQQQAvfGkihgBJDAhF0UM+XBBH9T57SImQ6KVB1r3Hm/QEAVlA4IEgAAACwAQCdASoKAAwAA4BaJQBdgCKGpd4AAP70d+7aw4IlA2he+jlImEdUG9XDIhje7ppVzEsQff2ArxXZ7i6jmtxQuD7s1SwqgAA="
+      }
+    ]
+  },
+  "editorial": {
+    "back-to-school-portrait": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAABQAgCdASoKAA0AA4BaJagCdFQAA5Pr+f71KYAA/vF9hlxc84n0/eTxA+VmxrSfKq0rM4+Q+MMFQk4lH5CoLEhxnGklH41AnnwYAA==",
+    "back-to-school-landscape": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoKAAUAA4BaJYgCdAD0jucCwAD+9IxMvuT39GVhZQEUIzNk/vUwIAIEAAA=",
+    "everyday-portrait": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADQAQCdASoKAAwAA4BaJagCdAEO+z+fQAD+ywzsTIWoRHYKULH/xvH+S75Oc4AA",
+    "everyday-landscape": "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAACwAQCdASoKAAUAA4BaJagCdAEO/gLsAP7ZwmZX5P0vf9B9+1mPiyAgAAA=",
+    "bundle-kit-inicial": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAwAgCdASoKAAwAA4BaJZACw7Ytzzo03PacoAD+9xFMT9MNTI5d8GhgaXBDpwLK1l4sYEO3LJbaA3DBLQkM/b+CEz2y36cYnmrs2wYr3Pqk8usxGqi1T1eRYkAAAA==",
+    "bundle-kit-primaria": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAQCdASoKAAwAA4BaJQAAS0JRz/gAAP73EWtw4HGr758t46AM21Z6ZVlGyj0RyDKjiW1T+5yOPDqMcDzrsAAA",
+    "bundle-kit-middle-school": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoKAAwAA4BaJQBOgMV4tYwhZBUAAP73EWtw4HGqyXLQXlCSUtOYA5egxTa63uQ71pxtZV6DpZ/qKv+YWAwgDikixlADP7l4n0iAAA==",
+    "bundle-kit-high-school": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAwAgCdASoKAAwAA4BaJZACw7YtVyA0PlDwAAD+9w8BYq9JcEcJBGSi7kPlZY1PTPLWuRGUYIdMoQnooFsyX5TOxyrf8IWBrKEZjGaGO3SLIAAA"
+  }
+}

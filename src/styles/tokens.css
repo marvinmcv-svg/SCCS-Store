@@ -1,0 +1,111 @@
+/*
+ * SCCS Store design tokens.
+ * Direction: On-style restraint. Neutral surfaces, near-black navy ink,
+ * crisp 2–4px image corners, pill buttons, one accent (SCCS navy).
+ * Every color has a light and dark value; components only use tokens.
+ */
+:root {
+  /* Surfaces */
+  --bg: #ffffff;
+  --bg-subtle: #f5f5f5; /* product backdrop */
+  --bg-muted: #ececec;
+  --bg-elevated: #ffffff;
+  --overlay: rgb(20 20 43 / 0.4);
+
+  /* Ink */
+  --ink: #14142b;
+  --ink-2: #5c5c6b; /* 6.0:1 on #f5f5f5 */
+  --ink-3: #8a8a96; /* decorative / disabled only */
+  --line: #e5e5e5;
+  --line-strong: #cfcfd4;
+
+  /* Brand */
+  --accent: #292963; /* SCCS navy: the only accent */
+  --accent-ink: #ffffff;
+  --accent-soft: #ebebf6;
+  --red: #b72034;
+  --red-soft: #fbeaec;
+  --gold: #f8a724;
+  --success: #1f7a3e;
+  --success-soft: #e6f4ea;
+  --warning: #8a5300;
+  --warning-soft: #fdf1dc;
+
+  /* Radius */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-sheet: 20px;
+  --radius-pill: 9999px;
+
+  /* Elevation: barely there */
+  --shadow-1: 0 1px 2px rgb(20 20 43 / 0.04);
+  --shadow-2: 0 8px 28px rgb(20 20 43 / 0.08);
+  --shadow-3: 0 24px 64px rgb(20 20 43 / 0.14);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms;
+  --dur-base: 260ms;
+  --dur-slow: 350ms;
+
+  /* Layout */
+  --gutter: 16px;
+  --topbar-h: 56px;
+  --tabbar-h: 64px;
+  --maxw: 1440px;
+
+  /* z-index scale */
+  --z-base: 0;
+  --z-sticky: 20;
+  --z-nav: 30;
+  --z-drawer: 40;
+  --z-sheet: 50;
+  --z-toast: 60;
+
+  color-scheme: light;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --gutter: 48px;
+  }
+}
+
+[data-theme='dark'] {
+  --bg: #000000;
+  --bg-subtle: #111111;
+  --bg-muted: #1c1c1e;
+  --bg-elevated: #151517;
+  --overlay: rgb(0 0 0 / 0.6);
+
+  --ink: #f5f5f7;
+  --ink-2: #a1a1aa;
+  --ink-3: #6b6b74;
+  --line: #26262b;
+  --line-strong: #3a3a41;
+
+  --accent: #c7c7f5; /* navy lifted for dark: 11:1 on #111 */
+  --accent-ink: #14143a;
+  --accent-soft: #1d1d3a;
+  --red: #f06372;
+  --red-soft: #3a1418;
+  --gold: #f8a724;
+  --success: #4ade80;
+  --success-soft: #0f2a19;
+  --warning: #fbbf24;
+  --warning-soft: #2e2208;
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 8px 28px rgb(0 0 0 / 0.5);
+  --shadow-3: 0 24px 64px rgb(0 0 0 / 0.6);
+
+  color-scheme: dark;
+}

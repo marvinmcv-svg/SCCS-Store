@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img" aria-label="SCCS">
+  <!-- Vector redraw of the SCCS crest for icons. Replace with the school's official SVG when available. -->
+  <path d="M100 8C140 8 172 16 188 24V112C188 160 150 196 100 212 50 196 12 160 12 112V24C28 16 60 8 100 8Z" fill="#fff" stroke="#292963" stroke-width="9" stroke-linejoin="round"/>
+  <g fill="#292963" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="500" text-anchor="middle">
+    <text x="44" y="70">S</text><text x="80" y="56">C</text><text x="120" y="56">C</text><text x="156" y="70">S</text>
+  </g>
+  <g>
+    <rect x="30" y="94" width="70" height="32" fill="#fff"/>
+    <g fill="#b22234"><rect x="30" y="94" width="70" height="4.6"/><rect x="30" y="103.2" width="70" height="4.6"/><rect x="30" y="112.4" width="70" height="4.6"/><rect x="30" y="121.6" width="70" height="4.4"/></g>
+    <rect x="30" y="94" width="30" height="17.4" fill="#3c3b6e"/>
+    <g fill="#fff"><circle cx="35" cy="98" r="1.2"/><circle cx="41" cy="98" r="1.2"/><circle cx="47" cy="98" r="1.2"/><circle cx="53" cy="98" r="1.2"/><circle cx="38" cy="102.5" r="1.2"/><circle cx="44" cy="102.5" r="1.2"/><circle cx="50" cy="102.5" r="1.2"/><circle cx="56" cy="102.5" r="1.2"/><circle cx="35" cy="107" r="1.2"/><circle cx="41" cy="107" r="1.2"/><circle cx="47" cy="107" r="1.2"/><circle cx="53" cy="107" r="1.2"/></g>
+    <rect x="100" y="94" width="70" height="10.7" fill="#d52b1e"/><rect x="100" y="104.7" width="70" height="10.7" fill="#f9e300"/><rect x="100" y="115.4" width="70" height="10.6" fill="#007934"/>
+  </g>
+</svg>

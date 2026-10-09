@@ -3,6 +3,14 @@
 > Status: draft for review · Source: https://sccs.edu.bo (read 2026-10-09)
 > Everything marked **⚠ PLACEHOLDER** will live in `/config/school.ts` so it's a one-line change.
 
+
+> **Revision (Phase 1, per owner feedback):** design direction changed to **On (on.com)-style**:
+> one neutral grotesk (**Geist**, variable) for display + UI, **Geist Mono** for small uppercase labels
+> (eyebrows, badges, SKUs, order codes); medium-weight headlines with tight tracking (no condensed type);
+> crisp 2–4 px corners on product imagery, pill buttons, generous whitespace. Archivo / Libre Franklin
+> are no longer used. Colors, voice and scope below are unchanged. The owner confirmed real photography,
+> the official logo and the real bank QR will be supplied later (placeholders are in place).
+
 ---
 
 ## 1. What the school website tells us

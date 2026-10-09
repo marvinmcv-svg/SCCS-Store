@@ -11,6 +11,8 @@ import { SiteFooter } from '@/components/store/site-footer';
 import { TabBar } from '@/components/store/tab-bar';
 import { AnnouncementBar } from '@/components/store/announcement-bar';
 import { BagDrawer } from '@/components/store/bag-drawer';
+import { Pwa } from '@/components/store/pwa';
+import { Analytics } from '@/components/analytics';
 
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
   const [locale, t, user, count, ownerKey, content] = await Promise.all([
@@ -45,6 +47,8 @@ export default async function StoreLayout({ children }: { children: React.ReactN
       <SiteFooter />
       <TabBar />
       <BagDrawer />
+      <Pwa />
+      <Analytics />
     </StoreProvider>
   );
 }

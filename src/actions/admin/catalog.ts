@@ -257,7 +257,7 @@ export async function adjustStock(input: z.input<typeof adjustSchema>) {
 export async function importStockCsv(formData: FormData) {
   return run(async () => {
     const user = await requireRole('ADMIN');
-    const { parseCsv } = await import('@/lib/admin');
+    const { parseCsv } = await import('@/lib/csv');
     const file = formData.get('file');
     if (!(file instanceof File) || file.size > 1_000_000) throw new ActionError('INVALID');
     const rows = parseCsv(await file.text());

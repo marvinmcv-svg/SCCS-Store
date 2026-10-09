@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getCurrentUser, can } from '@/lib/session';
-import { toCsv } from '@/lib/admin';
+import { toCsv } from '@/lib/csv';
 import { audit } from '@/lib/audit';
 
 /** CSV exports: orders (staff+), inventory (admin+). UTF-8 with BOM for Excel. */

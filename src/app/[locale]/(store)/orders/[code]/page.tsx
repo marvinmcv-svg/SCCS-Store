@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { db } from '@/lib/db';
 import { getCurrentUser } from '@/lib/session';
-import { canViewOrder, TRACK_STEPS } from '@/lib/orders';
+import { canViewOrder, TRACK_STEPS } from '@/lib/order-rules';
 import { getSettings, pickupLocation } from '@/lib/settings';
 import { formatBs } from '@/lib/money';
 import { addDays, formatDate, formatDateTime, formatSlot } from '@/lib/dates';

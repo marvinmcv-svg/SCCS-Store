@@ -7,7 +7,7 @@ import { db } from '@/lib/db';
 import { run, ActionError } from '@/lib/action';
 import { getCurrentUser, requireUser } from '@/lib/session';
 import { enforceRateLimit } from '@/lib/rate-limit';
-import { canViewOrder } from '@/lib/orders';
+import { canViewOrder } from '@/lib/order-rules';
 import { storage, sniffType, EXT, MAX_PROOF_BYTES } from '@/lib/storage';
 import { getOrCreateCart } from '@/lib/cart';
 import { availability } from '@/lib/stock';

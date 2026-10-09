@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { db } from '@/lib/db';
 import { requireAdminPage } from '@/lib/admin';
-import { TRANSITIONS } from '@/lib/orders';
+import { TRANSITIONS } from '@/lib/order-rules';
 import { formatBs } from '@/lib/money';
 import { formatDate, formatDateTime, formatSlot } from '@/lib/dates';
 import { gradeLabel } from '@/config/catalog';

@@ -11,8 +11,9 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
  *
  * - S3-compatible (Railway Buckets, Cloudflare R2, Supabase, AWS) when
  *   S3_BUCKET is set.
- * - Local disk (./.data/uploads) otherwise — fine for development, but
- *   ephemeral on Railway, so set S3_* in production.
+ * - Postgres (StoredFile table) on Vercel when no S3 keys are set.
+ * - Local disk (./.data/uploads) otherwise — development only.
+ * Force one with STORAGE_DRIVER=s3|db|local.
  */
 export interface StorageDriver {
   put(key: string, body: Buffer, contentType: string): Promise<void>;
@@ -89,9 +90,37 @@ class S3Driver implements StorageDriver {
   }
 }
 
+/**
+ * Postgres-backed storage: used on serverless hosts (Vercel) when no S3
+ * credentials are configured. Fine for a school store's volume (WebP
+ * product photos, ≤5 MB receipts); switch to S3 by adding S3_* keys.
+ */
+class DbDriver implements StorageDriver {
+  async put(key: string, body: Buffer, contentType: string) {
+    const { db } = await import('@/lib/db');
+    const k = safeKey(key);
+    const data = new Uint8Array(body);
+    await db.storedFile.upsert({ where: { key: k }, update: { data, contentType, size: body.length }, create: { key: k, data, contentType, size: body.length } });
+  }
+  async get(key: string) {
+    const { db } = await import('@/lib/db');
+    const f = await db.storedFile.findUnique({ where: { key: safeKey(key) } });
+    return f ? { body: Buffer.from(f.data), contentType: f.contentType } : null;
+  }
+  async delete(key: string) {
+    const { db } = await import('@/lib/db');
+    await db.storedFile.deleteMany({ where: { key: safeKey(key) } });
+  }
+}
+
 let driver: StorageDriver | null = null;
 export function storage(): StorageDriver {
-  if (!driver) driver = process.env.S3_BUCKET ? new S3Driver() : new LocalDriver();
+  if (!driver) {
+    const mode = process.env.STORAGE_DRIVER;
+    if (mode === 's3' || (!mode && process.env.S3_BUCKET && process.env.S3_ACCESS_KEY_ID)) driver = new S3Driver();
+    else if (mode === 'db' || (!mode && process.env.VERCEL)) driver = new DbDriver();
+    else driver = new LocalDriver();
+  }
   return driver;
 }
 

@@ -626,3 +626,13 @@ model Setting {
   value     Json
   updatedAt DateTime @updatedAt
 }
+
+/// Uploaded files when no S3 bucket is configured (e.g. on Vercel without
+/// bucket keys). Keys mirror storage keys: public/… or private/….
+model StoredFile {
+  key         String   @id
+  contentType String
+  data        Bytes
+  size        Int
+  createdAt   DateTime @default(now())
+}

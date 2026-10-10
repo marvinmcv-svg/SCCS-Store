@@ -32,7 +32,7 @@ const schema = z.object({
   pickupName: z.string().trim().max(80).optional(),
   pickupPhone: z.string().trim().max(20).optional(),
   slotId: z.string().nullable(),
-  paymentMethod: z.enum(['QR', 'TRANSFER', 'CASH', 'CARD']),
+  paymentMethod: z.enum(['QR', 'TRANSFER', 'CASH', 'CARD']).refine((m) => m === 'QR', 'invalidMethod'),
   notes: z.string().trim().max(500).optional(),
   idempotencyKey: z.string().min(16).max(64),
   locale: z.enum(['es', 'en']),

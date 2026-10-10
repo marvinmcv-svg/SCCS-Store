@@ -18,8 +18,8 @@ export type BundleCardData = {
 
 export function BundleCard({ b, priority }: { b: BundleCardData; priority?: boolean }) {
   return (
-    <Link href={`/bundles/${b.slug}`} className="pressable group block">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[3px] bg-bg-subtle">
+    <Link href={`/bundles/${b.slug}`} className="card-lift group block">
+      <div className="card-media relative aspect-[4/5] overflow-hidden rounded-[3px] bg-bg-subtle">
         {b.image && (
           <Image
             src={b.image}
@@ -29,7 +29,7 @@ export function BundleCard({ b, priority }: { b: BundleCardData; priority?: bool
             sizes="(min-width: 1024px) 30vw, 70vw"
             placeholder={b.blur ? 'blur' : 'empty'}
             blurDataURL={b.blur ?? undefined}
-            className="object-cover transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-[1.03]"
+            className="object-cover"
           />
         )}
         <Badge tone="accent" className="absolute top-2 left-2">

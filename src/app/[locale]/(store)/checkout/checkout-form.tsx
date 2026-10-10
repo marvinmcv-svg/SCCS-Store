@@ -61,14 +61,12 @@ export function CheckoutForm({
   user,
   slots,
   methods,
-  holdDays,
   location,
 }: {
   view: CartView;
   user: { name: string; email: string; phone: string } | null;
   slots: Slot[];
   methods: PaymentMethod[];
-  holdDays: number;
   location: string;
 }) {
   const t = useTranslations();
@@ -155,12 +153,6 @@ export function CheckoutForm({
   }
 
   const sectionCls = 'border-t border-line pt-8';
-  const methodLabel: Record<PaymentMethod, { title: string; desc: string }> = {
-    QR: { title: t('checkout.methodQR'), desc: t('checkout.methodQRDesc') },
-    TRANSFER: { title: t('checkout.methodTRANSFER'), desc: t('checkout.methodTRANSFERDesc') },
-    CASH: { title: t('checkout.methodCASH'), desc: t('checkout.methodCASHDesc', { days: holdDays }) },
-    CARD: { title: t('checkout.methodCARD'), desc: t('checkout.methodCARDDesc') },
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit, () => haptic('error'))} noValidate className="container-page pt-6 pb-40 md:pt-12 md:pb-16">
@@ -262,20 +254,23 @@ export function CheckoutForm({
             <h2 id="s-payment" className="t-title mb-4">
               2 · {t('checkout.payment')}
             </h2>
-            <div className="space-y-2" role="radiogroup" aria-label={t('checkout.payment')}>
-              {methods.map((m) => (
-                <label key={m} className={cn('pressable flex cursor-pointer gap-4 rounded-[12px] p-4 ring-1 ring-inset', v.paymentMethod === m ? 'ring-2 ring-ink' : 'ring-line hover:ring-ink-3')}>
-                  <input type="radio" className="sr-only" checked={v.paymentMethod === m} onChange={() => setValue('paymentMethod', m, { shouldValidate: formState.isSubmitted })} />
-                  <span className={cn('mt-0.5 grid size-5 shrink-0 place-items-center rounded-full ring-2', v.paymentMethod === m ? 'ring-accent' : 'ring-line-strong')} aria-hidden>
-                    {v.paymentMethod === m && <span className="size-2.5 rounded-full bg-accent" />}
-                  </span>
-                  <span>
-                    <span className="t-body block font-medium">{methodLabel[m].title}</span>
-                    <span className="t-caption block text-ink-2">{methodLabel[m].desc}</span>
-                  </span>
-                </label>
-              ))}
-              {err('paymentMethod') && <p className="t-caption text-red">{err('paymentMethod')}</p>}
+            <div className="rounded-[12px] p-4 ring-2 ring-ink ring-inset">
+              <p className="t-body flex items-center gap-2 font-medium">
+                <svg viewBox="0 0 24 24" className="size-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2" />
+                </svg>
+                {t('checkout.methodQR')}
+              </p>
+              <p className="t-caption mt-1 text-ink-2">{t('checkout.methodQRDesc')}</p>
+              <ol className="mt-4 space-y-2">
+                {(t.raw('checkout.qrSteps') as string[]).map((step, i) => (
+                  <li key={step} className="t-caption flex items-center gap-3">
+                    <span className="tabular grid size-6 shrink-0 place-items-center rounded-full bg-bg-subtle text-[12px] font-semibold">{i + 1}</span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
+              {err('paymentMethod') && <p className="t-caption mt-3 text-red">{err('paymentMethod')}</p>}
             </div>
             <p className="t-caption mt-3 text-ink-2">{t('checkout.secure')}</p>
           </section>

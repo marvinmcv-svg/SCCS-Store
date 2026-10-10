@@ -16,6 +16,8 @@ import { BundleCard } from '@/components/store/bundle-card';
 import { Carousel } from '@/components/ui/carousel';
 import { ButtonLink } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
+import { CountUp, Stagger } from '@/components/ui/motion';
+import { GRADES } from '@/config/catalog';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -182,16 +184,35 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Category tiles */}
       <section className="py-8 md:py-12" aria-label={t('shop.browseCategories')}>
         <SectionHeader title={t('shop.browseCategories')} />
-        <div className="container-page grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-4">
+        <Stagger className="container-page grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-4">
           {categoryTiles.map((c) => (
-            <Link key={c.slug} href={`/shop/${c.slug}`} className="pressable group relative block aspect-square overflow-hidden rounded-[3px] bg-bg-subtle">
-              {c.image && (
-                <Image src={c.image.url} alt="" fill sizes="(min-width: 768px) 20vw, 50vw" className="object-contain p-[12%] transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-105" />
-              )}
+            <Link key={c.slug} href={`/shop/${c.slug}`} className="card-lift card-media relative block aspect-square overflow-hidden rounded-[3px] bg-bg-subtle">
+              {c.image && <Image src={c.image.url} alt="" fill sizes="(min-width: 768px) 20vw, 50vw" className="object-contain p-[12%]" />}
               <span className="t-title absolute bottom-3 left-3">{t(`categories.${c.slug}`)}</span>
             </Link>
           ))}
-        </div>
+        </Stagger>
+      </section>
+
+      {/* Numbers (count up once) */}
+      <section className="container-page py-8 md:py-12" aria-labelledby="stats">
+        <h2 id="stats" className="t-label mb-4 text-ink-2">
+          {t('home.statsTitle')}
+        </h2>
+        <dl className="grid grid-cols-3 gap-2 md:gap-4">
+          {[
+            { n: products.length, label: t('home.statProducts') },
+            { n: bundles.length, label: t('home.statKits') },
+            { n: GRADES.length, label: t('home.statGrades') },
+          ].map((x) => (
+            <div key={x.label} className="flex flex-col-reverse justify-end rounded-[4px] bg-bg-subtle p-4 md:p-6">
+              <dt className="t-caption mt-1 text-ink-2">{x.label}</dt>
+              <dd className="text-[34px] leading-none font-semibold tracking-[-0.03em] md:text-[56px]">
+                <CountUp value={x.n} />
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* Trust strip */}

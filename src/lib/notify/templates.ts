@@ -41,16 +41,16 @@ export function render(id: TemplateId, locale: string, v: TemplateVars): Out {
         ? {
             subject: `Recibimos su pedido ${v.code}`,
             title: '¡Gracias por su pedido!',
-            body: `${hi} recibimos su pedido <b>${v.code}</b> por <b>${v.total}</b>. ${v.method === 'CASH' ? `Lo reservamos hasta el ${v.expires}; pague al recoger en ${v.location}.` : 'Si aún no lo hizo, suba su comprobante de pago desde el enlace.'}`,
+            body: `${hi} recibimos su pedido <b>${v.code}</b> por <b>${v.total}</b>. ${v.method === 'CASH' ? `Lo reservamos hasta el ${v.expires}; pague al recoger en ${v.location}.` : 'Pague con el QR del enlace y envíenos el comprobante por WhatsApp.'}`,
             cta: 'Ver mi pedido',
-            whatsapp: `SCCS Store: recibimos su pedido ${v.code} (${v.total}). Siga su pedido aquí: ${v.url}`,
+            whatsapp: `SCCS Store: recibimos su pedido ${v.code} (${v.total}). Pague con el QR y envíenos el comprobante por este chat: ${v.url}`,
           }
         : {
             subject: `We received your order ${v.code}`,
             title: 'Thank you for your order!',
-            body: `${hi} we received order <b>${v.code}</b> for <b>${v.total}</b>. ${v.method === 'CASH' ? `It's held until ${v.expires}; pay at pickup at the ${v.location}.` : "If you haven't yet, upload your payment receipt from the link."}`,
+            body: `${hi} we received order <b>${v.code}</b> for <b>${v.total}</b>. ${v.method === 'CASH' ? `It's held until ${v.expires}; pay at pickup at the ${v.location}.` : 'Pay with the QR from the link and send us the receipt on WhatsApp.'}`,
             cta: 'View my order',
-            whatsapp: `SCCS Store: we received your order ${v.code} (${v.total}). Track it here: ${v.url}`,
+            whatsapp: `SCCS Store: we received your order ${v.code} (${v.total}). Pay with the QR and send the receipt in this chat: ${v.url}`,
           };
     case 'payment_received':
       return es

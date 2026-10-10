@@ -107,7 +107,11 @@
     "trustExchangeBody": "{days} days to swap sizes.",
     "editorialTitle": "Made for every day",
     "editorialBody": "Durable fabrics, comfortable fits and the crest that unites us.",
-    "editorialCta": "Discover"
+    "editorialCta": "Discover",
+    "statsTitle": "SCCS Store in numbers",
+    "statProducts": "official products",
+    "statKits": "grade kits",
+    "statGrades": "grades, Pre-K to 12"
   },
   "categories": {
     "uniforms": "Uniforms",
@@ -274,11 +278,11 @@
     "slotHint": "Choose when you'll come by the school.",
     "slotLeft": "{count, plural, one {# spot left} other {# spots left}}",
     "slotFull": "Full",
-    "noSlots": "No pickup times available right now. Choose \"Pay at school\" and we'll coordinate with you.",
+    "noSlots": "No pickup times available right now. Confirm your order and we'll arrange pickup on WhatsApp.",
     "slotLater": "Arrange later",
-    "payment": "Payment method",
-    "methodQR": "Bank QR",
-    "methodQRDesc": "Pay from your banking app and upload the receipt.",
+    "payment": "Payment",
+    "methodQR": "QR payment + WhatsApp",
+    "methodQRDesc": "After you confirm you'll see the store's QR. Pay from your banking app and send us your order with the receipt on WhatsApp.",
     "methodTRANSFER": "Bank transfer",
     "methodTRANSFERDesc": "Transfer to the school's account and upload the receipt.",
     "methodCASH": "Pay at school",
@@ -302,12 +306,17 @@
     "emptyBag": "Your bag is empty",
     "edit": "Change",
     "pickupAt": "Pickup at the {location}",
-    "secure": "Secure order. We never store card details."
+    "secure": "No cards or bank details here: you pay from your own bank.",
+    "qrSteps": [
+      "Confirm your order",
+      "Scan the QR and pay from your bank",
+      "Send the order and receipt on WhatsApp"
+    ]
   },
   "order": {
     "title": "Order {code}",
     "thanks": "Thank you! We got your order",
-    "thanksBody": "We sent a confirmation to {email}. Keep your order code handy.",
+    "thanksBody": "Last step: pay with the QR and send us the order with your receipt on WhatsApp.",
     "code": "Order code",
     "track": "Tracking",
     "status": "Status",
@@ -318,7 +327,7 @@
     "statusPICKED_UP": "Picked up",
     "statusCANCELLED": "Cancelled",
     "statusEXPIRED": "Expired",
-    "descRECEIVED": "We're waiting for your payment or receipt.",
+    "descRECEIVED": "We're waiting for your QR payment and the receipt on WhatsApp.",
     "descPAYMENT_VERIFIED": "We've confirmed your payment.",
     "descPREPARING": "We're getting your items ready.",
     "descREADY": "Come by the school at your time slot with your QR code.",
@@ -328,10 +337,10 @@
     "payStatusVERIFIED": "Payment verified",
     "payStatusREJECTED": "Receipt rejected",
     "payStatusREFUNDED": "Refunded",
-    "payNow": "Pay for your order",
+    "payNow": "Pay by QR and send us your receipt",
     "qrTitle": "Scan with your banking app",
     "qrAmount": "Exact amount",
-    "qrReference": "Reference (add it to the transfer note)",
+    "qrReference": "Reference (add it to the payment note)",
     "bankTitle": "Transfer details",
     "bankName": "Bank",
     "bankHolder": "Account holder",
@@ -392,8 +401,12 @@
     "preorder": "Pre-order · arrives around {date}",
     "cancelled": "This order was cancelled.",
     "expired": "This order expired because payment wasn't received in time.",
-    "sendWhatsApp": "Send order to the store on WhatsApp",
-    "sendWhatsAppHint": "Send your order details to the store's WhatsApp so they have it right away."
+    "sendWhatsApp": "Send order and receipt on WhatsApp",
+    "sendWhatsAppHint": "WhatsApp opens with your order details. Just attach the payment screenshot.",
+    "qrStep1": "Scan the QR with your banking app and pay the exact amount.",
+    "qrStep2": "Tap the green button: WhatsApp opens with your order. Attach a screenshot of the receipt and send.",
+    "qrStep3": "We verify the payment and confirm on WhatsApp.",
+    "waReceipt": "I'm attaching a screenshot of my payment receipt."
   },
   "favorites": {
     "title": "Favorites",

@@ -38,6 +38,13 @@ const card: PaymentProvider = {
 
 export const PROVIDERS: Record<PaymentMethod, PaymentProvider> = { QR: qr, TRANSFER: transfer, CASH: cash, CARD: card };
 
-export function enabledMethods(settings: PaymentSettings): PaymentMethod[] {
-  return (Object.keys(PROVIDERS) as PaymentMethod[]).filter((m) => PROVIDERS[m].enabled(settings));
+/**
+ * The store takes payment by QR only: families pay with the bank QR and send
+ * the order and receipt over WhatsApp. Transfer/cash/card stay defined so
+ * older orders still render, but they can't be chosen at checkout.
+ */
+export const CHECKOUT_METHODS: PaymentMethod[] = ['QR'];
+
+export function enabledMethods(_settings: PaymentSettings): PaymentMethod[] {
+  return CHECKOUT_METHODS;
 }

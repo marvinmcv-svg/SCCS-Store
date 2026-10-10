@@ -15,8 +15,11 @@ crisp product imagery, one accent (SCCS navy). See `docs/brand-and-scope.md`.
   size; "Still fits?" after 6 months), grade kits with per-item sizes and bundle discount,
   complete-the-uniform checklist, pre-orders, back-in-stock alerts, pickup slots with
   capacity, pickup QR, exchange requests, reorder in one tap.
-- **Payments (Bolivia)**: bank QR (QR bancario) and transfer with receipt upload, or pay at
-  school. Manual verification in the admin. Card gateway interface ready (`src/lib/payments`).
+- **Payments**: bank QR only. After confirming, the order page shows the store QR and a button
+  that opens WhatsApp with the full order; the family attaches the payment screenshot there.
+  Staff verify in the admin (customer gets a WhatsApp confirmation).
+- **Motion**: five small motions only (card lift, soft press, 40ms enter stagger, count-up,
+  easing focus ring), ≤3 moving at once, off with prefers-reduced-motion (`components/ui/motion.tsx`).
 - **Admin** (`/admin`): dashboard, orders + receipt verification, QR pickup desk, products
   (images, variants), kits, inventory (audit log, CSV import/export), pickup slots, content,
   exchanges, reports, users & roles, settings (bank details, QR image), audit log.

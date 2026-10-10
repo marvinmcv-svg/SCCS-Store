@@ -26,7 +26,6 @@ export default async function CheckoutPage({ params }: { params: Promise<{ local
       user={user ? { name: user.name ?? '', email: user.email, phone: user.phone ?? '' } : null}
       slots={slots.map((s) => ({ id: s.id, label: formatSlot(s.startsAt, s.endsAt, locale), left: Math.max(0, s.capacity - s.booked) }))}
       methods={enabledMethods(settings.payments)}
-      holdDays={settings.store.payAtSchoolHoldDays}
       location={pickupLocation(settings.store, locale)}
     />
   );

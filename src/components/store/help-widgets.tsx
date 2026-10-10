@@ -55,7 +55,7 @@ function WhatsAppLauncher({ active, onClick }: { active: boolean; onClick: () =>
       aria-expanded={active}
       title={t('open')}
       style={{ backgroundColor: WA_GREEN }}
-      className="pressable grid size-14 place-items-center rounded-full text-white shadow-[0_6px_20px_rgba(37,211,102,0.35)] transition-transform hover:scale-105"
+      className="pressable grid size-14 place-items-center rounded-full text-white shadow-[0_6px_20px_rgba(37,211,102,0.35)]"
     >
       {active ? (
         <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
@@ -130,10 +130,9 @@ function MarvinLauncher({ active, onClick }: { active: boolean; onClick: () => v
       aria-label={t('open')}
       aria-expanded={active}
       title={t('open')}
-      className="pressable group flex h-14 items-center gap-2 rounded-full bg-ink pr-5 pl-2 text-bg shadow-3 transition-transform hover:scale-[1.03]"
+      className="pressable grid size-14 place-items-center rounded-full bg-accent text-[22px] font-semibold text-accent-ink shadow-3"
     >
-      <MarvinAvatar className="size-10 text-[17px]" />
-      <span className="text-[14px] font-semibold">{t('title')}</span>
+      <span aria-hidden>M</span>
     </button>
   );
 }

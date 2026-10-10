@@ -16,7 +16,6 @@ import { Badge } from '@/components/ui/badge';
 import { QrCode } from '@/components/ui/qr-code';
 import { ButtonLink } from '@/components/ui/button';
 import { CopyButton } from '@/components/store/copy-button';
-import { ProofForm } from './proof-form';
 import { ExchangeButton } from './exchange-button';
 import { ReorderButton } from './reorder-button';
 
@@ -54,13 +53,27 @@ export default async function OrderPage({ params, searchParams }: Props) {
     at: at(s) ? formatDateTime(at(s)!, locale) : undefined,
   }));
   const stepIdx = steps.findIndex((s) => s.id === order.status);
-  const needsProof = ['QR', 'TRANSFER'].includes(order.paymentMethod) && ['PENDING', 'REJECTED'].includes(order.paymentStatus) && !closed;
   const lastRejected = order.proofs.find((p) => p.status === 'REJECTED');
   const location = pickupLocation(settings.store, locale);
   const exchangeOpen = order.status === 'PICKED_UP' && order.pickedUpAt && addDays(order.pickedUpAt, settings.store.exchangeDays) > new Date();
   const isOwner = viewer?.id === order.userId;
   const token = sp.t ?? (isOwner || viewer?.role !== 'CUSTOMER' ? order.pickupToken : undefined);
   const p = settings.payments;
+  const waOrder = clickToChat(
+    settings.store.whatsapp,
+    `${orderSummaryText(
+      {
+        code: order.code,
+        name: order.name,
+        phone: order.phone,
+        total: formatBs(order.totalCents),
+        paymentMethod: order.paymentMethod,
+        slot: order.pickupSlot ? formatSlot(order.pickupSlot.startsAt, order.pickupSlot.endsAt, locale) : undefined,
+        items: order.items.map((i) => ({ qty: i.qty, name: i.productName, size: i.size, student: i.studentName })),
+      },
+      locale,
+    )}\n\n${t('order.waReceipt')}`,
+  );
 
   return (
     <div className="container-page pt-6 pb-16 md:pt-12">
@@ -125,6 +138,28 @@ export default async function OrderPage({ params, searchParams }: Props) {
                   </div>
                 </div>
               )}
+              {order.paymentMethod === 'QR' && (
+                <>
+                  <ol className="mt-6 space-y-3">
+                    {[t('order.qrStep1'), t('order.qrStep2'), t('order.qrStep3')].map((step, i) => (
+                      <li key={i} className="t-body flex gap-3">
+                        <span className="tabular grid size-6 shrink-0 place-items-center rounded-full bg-bg text-[12px] font-semibold">{i + 1}</span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  <a
+                    href={waOrder}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pressable mt-6 flex h-[52px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 text-center text-[15px] font-semibold text-white"
+                  >
+                    <WhatsAppGlyph className="size-5 shrink-0" />
+                    {t('order.sendWhatsApp')}
+                  </a>
+                  <p className="t-caption mt-2 text-center text-ink-2">{t('order.sendWhatsAppHint')}</p>
+                </>
+              )}
               {order.paymentMethod === 'TRANSFER' && (
                 <dl className="t-body mt-5 grid gap-3 sm:grid-cols-2">
                   {[
@@ -150,7 +185,6 @@ export default async function OrderPage({ params, searchParams }: Props) {
                 <p className="t-caption mt-5 rounded-[10px] bg-red-soft p-3 text-red">{t('order.proofRejected', { reason: lastRejected.note ?? '—' })}</p>
               )}
               {order.paymentStatus === 'SUBMITTED' && <p className="t-caption mt-5 rounded-[10px] bg-bg p-3 text-ink-2">{t('order.proofSent')}</p>}
-              {needsProof && <ProofForm code={order.code} token={token ?? null} />}
             </section>
           )}
 
@@ -237,34 +271,6 @@ export default async function OrderPage({ params, searchParams }: Props) {
               </div>
             </dl>
           </section>
-          {!['PICKED_UP', 'CANCELLED', 'EXPIRED'].includes(order.status) && (
-            <div className="space-y-2">
-              <a
-                href={clickToChat(
-                  settings.store.whatsapp,
-                  orderSummaryText(
-                    {
-                      code: order.code,
-                      name: order.name,
-                      phone: order.phone,
-                      total: formatBs(order.totalCents),
-                      paymentMethod: order.paymentMethod,
-                      slot: order.pickupSlot ? formatSlot(order.pickupSlot.startsAt, order.pickupSlot.endsAt, locale) : undefined,
-                      items: order.items.map((i) => ({ qty: i.qty, name: i.productName, size: i.size, student: i.studentName })),
-                    },
-                    locale,
-                  ),
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="pressable flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 text-center text-[15px] font-semibold text-white"
-              >
-                <WhatsAppGlyph className="size-5 shrink-0" />
-                {t('order.sendWhatsApp')}
-              </a>
-              <p className="t-caption px-2 text-center text-ink-2">{t('order.sendWhatsAppHint')}</p>
-            </div>
-          )}
           <a
             href={clickToChat(settings.store.whatsapp, `${locale === 'en' ? 'Hi! About my order' : 'Hola, consulta sobre mi pedido'} ${order.code}`)}
             target="_blank"

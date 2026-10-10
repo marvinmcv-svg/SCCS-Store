@@ -72,6 +72,8 @@
     outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: 4px;
+    /* 5 · Focus ring eases in (outline only, so layout never moves). */
+    animation: focus-ring var(--t-fast) var(--ease-out);
   }
   button,
   [role='button'] {
@@ -194,7 +196,76 @@
   animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* ───────────────────────────── Motion ─────────────────────────────
+   Five small motions only (transform/opacity/outline, so no layout
+   shift): 1 card lift on hover · 2 soft press (the `pressable` utility,
+   scale .97) · 3 40ms stagger as cards enter (components/ui/motion.tsx
+   schedules it: ≤3 moving at once) · 4 count-up (CountUp) · 5 focus ring. */
+:root {
+  --t-fast: 180ms;
+  --t-med: 260ms;
+}
+@keyframes focus-ring {
+  from {
+    outline-offset: 0;
+    outline-color: transparent;
+  }
+}
+
+/* 1 · Lift on hover (mouse/trackpad only). Shadow sits on the image. */
+@utility card-lift {
+  transition:
+    transform var(--t-med) var(--ease-out),
+    box-shadow var(--t-med) var(--ease-out);
+  & .card-media {
+    transition: box-shadow var(--t-med) var(--ease-out);
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &:hover {
+      transform: translateY(-4px);
+    }
+    &:hover .card-media,
+    &.card-media:hover {
+      box-shadow: 0 14px 28px -14px rgb(0 0 0 / 0.28);
+    }
+  }
+}
+
+/* 3 · Stagger on enter. Hidden only when JS can run it; a 3s fallback
+   reveals everything if the page never hydrates. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+  }
+}
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-stagger]:not([data-in]) > [data-stagger-item] {
+    opacity: 0;
+  }
+  :root:not(.hydrated) [data-stagger]:not([data-in]) > [data-stagger-item] {
+    animation: reveal-fallback 0s 3s forwards;
+  }
+  [data-stagger][data-in] > [data-stagger-item]:not([data-static]) {
+    animation: rise var(--t-med) var(--ease-out) both;
+    animation-delay: var(--d, 0ms);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  [data-stagger-item] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
   *,
   *::before,
   *::after {

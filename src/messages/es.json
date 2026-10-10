@@ -107,7 +107,11 @@
     "trustExchangeBody": "{days} días para cambiar de talla.",
     "editorialTitle": "Hecho para el día a día",
     "editorialBody": "Telas resistentes, cortes cómodos y el escudo que nos une.",
-    "editorialCta": "Descubrir"
+    "editorialCta": "Descubrir",
+    "statsTitle": "SCCS Store en números",
+    "statProducts": "productos oficiales",
+    "statKits": "kits por nivel",
+    "statGrades": "grados, Pre-K a 12°"
   },
   "categories": {
     "uniforms": "Uniformes",
@@ -274,11 +278,11 @@
     "slotHint": "Elija cuándo pasará por el colegio.",
     "slotLeft": "{count, plural, one {Queda # lugar} other {Quedan # lugares}}",
     "slotFull": "Lleno",
-    "noSlots": "No hay horarios disponibles por ahora. Elija «Pagar en el colegio» y coordinaremos con usted.",
+    "noSlots": "No hay horarios de recojo disponibles ahora. Confirme su pedido y coordinaremos el recojo por WhatsApp.",
     "slotLater": "Coordinar después",
-    "payment": "Método de pago",
-    "methodQR": "QR bancario",
-    "methodQRDesc": "Pague desde la app de su banco y suba el comprobante.",
+    "payment": "Pago",
+    "methodQR": "Pago por QR + WhatsApp",
+    "methodQRDesc": "Al confirmar verá el QR de la tienda. Pague desde la app de su banco y envíenos su pedido con el comprobante por WhatsApp.",
     "methodTRANSFER": "Transferencia bancaria",
     "methodTRANSFERDesc": "Transfiera a la cuenta del colegio y suba el comprobante.",
     "methodCASH": "Pagar en el colegio",
@@ -302,12 +306,17 @@
     "emptyBag": "Su bolsa está vacía",
     "edit": "Cambiar",
     "pickupAt": "Recojo en {location}",
-    "secure": "Pedido seguro. Nunca guardamos datos de tarjetas."
+    "secure": "Sin tarjetas ni datos bancarios: usted paga desde su propio banco.",
+    "qrSteps": [
+      "Confirme su pedido",
+      "Escanee el QR y pague desde su banco",
+      "Envíe el pedido y el comprobante por WhatsApp"
+    ]
   },
   "order": {
     "title": "Pedido {code}",
     "thanks": "¡Gracias! Recibimos su pedido",
-    "thanksBody": "Le enviamos la confirmación a {email}. Guarde su código de pedido.",
+    "thanksBody": "Último paso: pague con el QR y envíenos el pedido con su comprobante por WhatsApp.",
     "code": "Código de pedido",
     "track": "Seguimiento",
     "status": "Estado",
@@ -318,7 +327,7 @@
     "statusPICKED_UP": "Recogido",
     "statusCANCELLED": "Cancelado",
     "statusEXPIRED": "Vencido",
-    "descRECEIVED": "Estamos esperando su pago o comprobante.",
+    "descRECEIVED": "Esperamos su pago por QR y el comprobante por WhatsApp.",
     "descPAYMENT_VERIFIED": "Confirmamos su pago.",
     "descPREPARING": "Estamos alistando sus prendas.",
     "descREADY": "Pase por el colegio en su horario con su código QR.",
@@ -328,10 +337,10 @@
     "payStatusVERIFIED": "Pago verificado",
     "payStatusREJECTED": "Comprobante rechazado",
     "payStatusREFUNDED": "Reembolsado",
-    "payNow": "Pague su pedido",
+    "payNow": "Pague con QR y envíenos su comprobante",
     "qrTitle": "Escanee con la app de su banco",
     "qrAmount": "Monto exacto",
-    "qrReference": "Referencia (escríbala en la glosa)",
+    "qrReference": "Referencia (escríbala en la glosa del pago)",
     "bankTitle": "Datos para la transferencia",
     "bankName": "Banco",
     "bankHolder": "Titular",
@@ -392,8 +401,12 @@
     "preorder": "Reserva · llega aprox. {date}",
     "cancelled": "Este pedido fue cancelado.",
     "expired": "Este pedido venció porque no se recibió el pago a tiempo.",
-    "sendWhatsApp": "Enviar pedido a la tienda por WhatsApp",
-    "sendWhatsAppHint": "Envíe el detalle del pedido al WhatsApp de la tienda para que lo tengan al instante."
+    "sendWhatsApp": "Enviar pedido y comprobante por WhatsApp",
+    "sendWhatsAppHint": "Se abre WhatsApp con el detalle de su pedido. Solo adjunte la captura del pago.",
+    "qrStep1": "Escanee el QR con la app de su banco y pague el monto exacto.",
+    "qrStep2": "Toque el botón verde: se abre WhatsApp con su pedido. Adjunte la captura del comprobante y envíe.",
+    "qrStep3": "Verificamos el pago y le confirmamos por WhatsApp.",
+    "waReceipt": "Adjunto la captura de mi comprobante de pago."
   },
   "favorites": {
     "title": "Favoritos",

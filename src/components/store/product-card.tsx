@@ -45,9 +45,9 @@ export function ProductCard({
 }) {
   const [first, second] = product.images;
   return (
-    <article className={cn('group/card relative', className)}>
-      <Link href={`/p/${product.slug}`} className="pressable block outline-none" prefetch>
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[3px] bg-bg-subtle">
+    <article className={cn('card-lift group/card relative', className)}>
+      <Link href={`/p/${product.slug}`} className="block outline-none" prefetch>
+        <div className="card-media relative aspect-[4/5] overflow-hidden rounded-[3px] bg-bg-subtle">
           <MaybeTransition name={morph ? `product-${product.slug}` : undefined}>
             <div className="absolute inset-0">
               {first ? (

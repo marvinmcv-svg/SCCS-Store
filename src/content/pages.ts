@@ -19,7 +19,7 @@ export function getPage(slug: PageSlug, locale: string, v: Vars): StaticPage {
             intro: 'SCCS Store es la tienda oficial de Santa Cruz Cooperative School. Uniformes, mochilas y recuerdos Jaguar, con recojo en el colegio.',
             blocks: [
               { h: 'Por qué existe', p: ['Queremos que comprar el uniforme sea rápido y sin errores: tallas guardadas por estudiante, kits por nivel y un horario de recojo que se adapta a su rutina.'] },
-              { h: 'Cómo funciona', list: ['Elija productos o un kit para su nivel.', 'Pague con QR bancario, transferencia o en el colegio.', 'Elija un horario de recojo y presente su código QR.'] },
+              { h: 'Cómo funciona', list: ['Elija productos o un kit para su nivel.', 'Pague con QR bancario y envíenos el comprobante por WhatsApp.', 'Elija un horario de recojo y presente su código QR.'] },
               { h: 'Desde 1959', p: ['Santa Cruz Cooperative School fue fundado en 1959 y hoy es el hogar de cientos de Jaguars. Todo lo recaudado apoya a nuestra comunidad educativa.'] },
             ],
           }
@@ -28,7 +28,7 @@ export function getPage(slug: PageSlug, locale: string, v: Vars): StaticPage {
             intro: 'SCCS Store is the official store of Santa Cruz Cooperative School. Uniforms, bags and Jaguar souvenirs, with pickup at school.',
             blocks: [
               { h: 'Why it exists', p: ['We want buying the uniform to be fast and mistake-free: saved sizes per student, grade kits and a pickup time that fits your routine.'] },
-              { h: 'How it works', list: ['Choose products or a kit for your grade.', 'Pay by bank QR, transfer or at school.', 'Pick a pickup time and show your QR code.'] },
+              { h: 'How it works', list: ['Choose products or a kit for your grade.', 'Pay by bank QR and send us the receipt on WhatsApp.', 'Pick a pickup time and show your QR code.'] },
               { h: 'Since 1959', p: ['Santa Cruz Cooperative School was founded in 1959 and is home to hundreds of Jaguars. Proceeds support our learning community.'] },
             ],
           };
@@ -75,19 +75,17 @@ export function getPage(slug: PageSlug, locale: string, v: Vars): StaticPage {
             qa: es
               ? [
                   { q: '¿Hacen envíos?', a: `No. Todos los pedidos se recogen en ${v.location}, en el horario que elija al pagar.` },
-                  { q: '¿Cómo pago?', a: 'Con QR bancario o transferencia (suba su comprobante) o en el colegio al recoger, en efectivo o tarjeta.' },
+                  { q: '¿Cómo pago?', a: 'Solo con QR bancario. Al confirmar el pedido verá el QR; pague desde la app de su banco y envíenos el pedido con la captura del comprobante por WhatsApp.' },
                   { q: '¿Cuánto tarda la verificación del pago?', a: 'Revisamos los comprobantes en horario escolar, normalmente el mismo día. Le avisamos por WhatsApp y correo.' },
                   { q: '¿Puedo cambiar una talla?', a: `Sí, dentro de ${v.exchangeDays} días desde el recojo, con la prenda sin uso y con etiqueta. Solicítelo desde su pedido.` },
-                  { q: '¿Qué pasa si no pago un pedido "Pagar en el colegio"?', a: `La reserva vence a los ${v.holdDays} días y el stock vuelve a estar disponible.` },
                   { q: '¿Puede recoger otra persona?', a: 'Sí. Indique su nombre al pagar y que presente el código QR del pedido.' },
                   { q: '¿Qué es una reserva?', a: 'Si una talla está agotada y el producto lo permite, puede reservarla. Le avisaremos cuando llegue.' },
                 ]
               : [
                   { q: 'Do you ship?', a: `No. All orders are collected at the ${v.location}, at the time you choose at checkout.` },
-                  { q: 'How do I pay?', a: 'By bank QR or transfer (upload your receipt), or at school at pickup by cash or card.' },
+                  { q: 'How do I pay?', a: 'By bank QR only. After you confirm your order you see the QR; pay from your banking app and send us the order with a screenshot of the receipt on WhatsApp.' },
                   { q: 'How long does payment verification take?', a: "We review receipts during school hours, usually the same day. We'll notify you by WhatsApp and email." },
                   { q: 'Can I exchange a size?', a: `Yes, within ${v.exchangeDays} days of pickup, unworn and with tags. Request it from your order.` },
-                  { q: 'What if I don’t pay a "Pay at school" order?', a: `The reservation expires after ${v.holdDays} days and the stock is released.` },
                   { q: 'Can someone else pick up?', a: 'Yes. Enter their name at checkout and have them show the order QR code.' },
                   { q: 'What is a pre-order?', a: "If a size is sold out and the product allows it, you can reserve it. We'll tell you when it arrives." },
                 ],
@@ -119,8 +117,8 @@ export function getPage(slug: PageSlug, locale: string, v: Vars): StaticPage {
             intro: 'Al comprar en SCCS Store acepta estas condiciones. (Borrador: debe ser revisado por el colegio.)',
             blocks: [
               { h: 'Pedidos', p: ['Un pedido se confirma al recibirlo. La disponibilidad se garantiza al confirmar; durante el pago reservamos el stock por 15 minutos.'] },
-              { h: 'Precios y pagos', p: ['Precios en bolivianos (Bs), con impuestos incluidos. Los pagos por QR y transferencia se verifican manualmente. Nunca almacenamos datos de tarjetas.'] },
-              { h: 'Recojo', p: [`Los pedidos se entregan en ${v.location} contra presentación del código QR. Pedidos "Pagar en el colegio" no pagados vencen a los ${v.holdDays} días.`] },
+              { h: 'Precios y pagos', p: ['Precios en bolivianos (Bs), con impuestos incluidos. Los pagos se realizan solo por QR bancario y se verifican manualmente con el comprobante enviado por WhatsApp.'] },
+              { h: 'Recojo', p: [`Los pedidos se entregan en ${v.location} contra presentación del código QR.`] },
               { h: 'Cambios', p: [`Cambios de talla dentro de ${v.exchangeDays} días desde el recojo, con la prenda sin uso y con etiqueta. Productos con falla se cambian siempre.`] },
             ],
           }
@@ -129,8 +127,8 @@ export function getPage(slug: PageSlug, locale: string, v: Vars): StaticPage {
             intro: 'By ordering from SCCS Store you accept these terms. (Draft: to be reviewed by the school.)',
             blocks: [
               { h: 'Orders', p: ['An order is confirmed once received. Availability is guaranteed at confirmation; during checkout we hold stock for 15 minutes.'] },
-              { h: 'Prices & payment', p: ['Prices in bolivianos (Bs), taxes included. QR and transfer payments are verified manually. We never store card data.'] },
-              { h: 'Pickup', p: [`Orders are handed over at the ${v.location} on presentation of the QR code. Unpaid "Pay at school" orders expire after ${v.holdDays} days.`] },
+              { h: 'Prices & payment', p: ['Prices in bolivianos (Bs), taxes included. Payment is by bank QR only and is verified manually from the receipt sent on WhatsApp.'] },
+              { h: 'Pickup', p: [`Orders are handed over at the ${v.location} on presentation of the QR code.`] },
               { h: 'Exchanges', p: [`Size exchanges within ${v.exchangeDays} days of pickup, unworn and with tags. Defective items are always exchanged.`] },
             ],
           };

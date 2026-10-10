@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { cn } from '@/lib/utils';
+import { useStagger } from './motion';
 
 /**
  * Snap-scrolling rail. Native scroll keeps momentum and accessibility;
@@ -14,6 +15,7 @@ export function Carousel({
   ariaLabel,
   prevLabel = 'Anterior',
   nextLabel = 'Siguiente',
+  stagger = true,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -21,8 +23,12 @@ export function Carousel({
   ariaLabel: string;
   prevLabel?: string;
   nextLabel?: string;
+  /** Cards rise in with a 40ms stagger the first time the rail is seen. */
+  stagger?: boolean;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
+  const staggerRef = React.useRef<HTMLDivElement>(null);
+  useStagger(staggerRef);
   const [edges, setEdges] = React.useState({ start: true, end: false });
 
   const update = React.useCallback(() => {
@@ -52,14 +58,23 @@ export function Carousel({
   return (
     <div className={cn('group/carousel relative', className)}>
       <div
-        ref={ref}
+        ref={(node) => {
+          ref.current = node;
+          if (stagger) staggerRef.current = node;
+        }}
         role="region"
         aria-label={ariaLabel}
         tabIndex={0}
-        className="no-scrollbar flex snap-x snap-mandatory scroll-px-[var(--gutter)] gap-2 overflow-x-auto overscroll-x-contain px-[var(--gutter)] md:gap-4"
+        data-stagger={stagger ? '' : undefined}
+        // py/-my leave room for the 4px hover lift without changing layout.
+        className="no-scrollbar -my-2 flex snap-x snap-mandatory scroll-px-[var(--gutter)] gap-2 overflow-x-auto overscroll-x-contain px-[var(--gutter)] py-2 md:gap-4"
       >
         {React.Children.map(children, (child) =>
-          child ? <div className={cn('shrink-0 snap-start', itemClassName)}>{child}</div> : null,
+          child ? (
+            <div data-stagger-item={stagger ? '' : undefined} className={cn('shrink-0 snap-start', itemClassName)}>
+              {child}
+            </div>
+          ) : null,
         )}
       </div>
       <div className="pointer-events-none absolute inset-x-0 top-[35%] hidden justify-between px-4 md:flex">

@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
 import { Field, Input } from '@/components/ui/input';
-import { Toggle } from '@/components/ui/toggle';
 import { toast } from '@/components/ui/toaster';
 import { Card } from '@/components/admin/ui';
 import type { PaymentSettings, StoreSettings } from '@/lib/settings';
@@ -19,7 +18,6 @@ export function PaymentSettingsForm({ initial }: { initial: PaymentSettings }) {
   const router = useRouter();
   const [v, setV] = React.useState(initial);
   const [pending, setPending] = React.useState(false);
-  const inp = (k: keyof PaymentSettings) => ({ value: String(v[k]), onChange: (e: React.ChangeEvent<HTMLInputElement>) => setV({ ...v, [k]: e.target.value }), className: 'bg-bg' });
   return (
     <Card title={t('payments')}>
       <form
@@ -34,11 +32,6 @@ export function PaymentSettingsForm({ initial }: { initial: PaymentSettings }) {
           router.refresh();
         }}
       >
-        <div className="space-y-2">
-          <Toggle label={t('qrEnabled')} checked={v.qrEnabled} onCheckedChange={(c) => setV({ ...v, qrEnabled: c })} />
-          <Toggle label={t('transferEnabled')} checked={v.transferEnabled} onCheckedChange={(c) => setV({ ...v, transferEnabled: c })} />
-          <Toggle label={t('cashEnabled')} checked={v.cashEnabled} onCheckedChange={(c) => setV({ ...v, cashEnabled: c })} />
-        </div>
         <div className="flex items-start gap-4">
           <label className="pressable relative block size-36 shrink-0 cursor-pointer overflow-hidden rounded-[12px] bg-white ring-1 ring-line ring-inset">
             <Image src={v.qrImage} alt={t('qr')} fill sizes="144px" className="object-contain p-2" unoptimized={v.qrImage.endsWith('.svg')} />
@@ -61,14 +54,6 @@ export function PaymentSettingsForm({ initial }: { initial: PaymentSettings }) {
             <p className="t-body font-medium">{t('qr')}</p>
             <p className="t-caption text-ink-2">{t('qrHint')}</p>
           </div>
-        </div>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <Field label={t('bankName')} htmlFor="ps-bank"><Input {...inp('bankName')} /></Field>
-          <Field label={t('accountHolder')} htmlFor="ps-holder"><Input {...inp('accountHolder')} /></Field>
-          <Field label={t('accountNumber')} htmlFor="ps-acc"><Input {...inp('accountNumber')} /></Field>
-          <Field label={t('nit')} htmlFor="ps-nit"><Input {...inp('nit')} /></Field>
-          <Field label={t('accountTypeEs')} htmlFor="ps-tes"><Input {...inp('accountTypeEs')} /></Field>
-          <Field label={t('accountTypeEn')} htmlFor="ps-ten"><Input {...inp('accountTypeEn')} /></Field>
         </div>
         <Button type="submit" loading={pending}>{tc('save')}</Button>
       </form>
@@ -104,7 +89,6 @@ export function StoreSettingsForm({ initial }: { initial: StoreSettings }) {
           <Field label={t('pickupLocationEs')} htmlFor="ss-ples"><Input {...inp('pickupLocationEs')} /></Field>
           <Field label={t('pickupLocationEn')} htmlFor="ss-plen"><Input {...inp('pickupLocationEn')} /></Field>
           <Field label={t('exchangeDays')} htmlFor="ss-ex"><Input {...inp('exchangeDays')} inputMode="numeric" /></Field>
-          <Field label={t('holdDays')} htmlFor="ss-hold"><Input {...inp('payAtSchoolHoldDays')} inputMode="numeric" /></Field>
         </div>
         <Button type="submit" loading={pending}>{tc('save')}</Button>
       </form>

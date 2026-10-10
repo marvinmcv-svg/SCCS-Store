@@ -33,7 +33,7 @@ function safeKey(key: string) {
 }
 
 class LocalDriver implements StorageDriver {
-  root = path.resolve(process.env.STORAGE_DIR || '.data/uploads');
+  root = path.resolve(/*turbopackIgnore: true*/ process.env.STORAGE_DIR || '.data/uploads');
   async put(key: string, body: Buffer) {
     const file = path.join(this.root, safeKey(key));
     await mkdir(path.dirname(file), { recursive: true });
@@ -58,7 +58,8 @@ class S3Driver implements StorageDriver {
   client = new S3Client({
     region: process.env.S3_REGION || 'auto',
     endpoint: process.env.S3_ENDPOINT || undefined,
-    forcePathStyle: !!process.env.S3_ENDPOINT,
+    // Railway Buckets / R2 use virtual-host style; MinIO needs path style.
+    forcePathStyle: process.env.S3_FORCE_PATH_STYLE === '1',
     credentials: process.env.S3_ACCESS_KEY_ID
       ? { accessKeyId: process.env.S3_ACCESS_KEY_ID, secretAccessKey: process.env.S3_SECRET_ACCESS_KEY ?? '' }
       : undefined,

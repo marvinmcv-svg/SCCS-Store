@@ -9,6 +9,8 @@ import { getSettings, pickupLocation } from '@/lib/settings';
 import { formatBs } from '@/lib/money';
 import { addDays, formatDate, formatDateTime, formatSlot } from '@/lib/dates';
 import { clickToChat } from '@/lib/notify/whatsapp';
+import { orderSummaryText } from '@/lib/notify/templates';
+import { WhatsAppGlyph } from '@/components/store/help-widgets';
 import { Stepper } from '@/components/ui/stepper';
 import { Badge } from '@/components/ui/badge';
 import { QrCode } from '@/components/ui/qr-code';
@@ -235,6 +237,34 @@ export default async function OrderPage({ params, searchParams }: Props) {
               </div>
             </dl>
           </section>
+          {!['PICKED_UP', 'CANCELLED', 'EXPIRED'].includes(order.status) && (
+            <div className="space-y-2">
+              <a
+                href={clickToChat(
+                  settings.store.whatsapp,
+                  orderSummaryText(
+                    {
+                      code: order.code,
+                      name: order.name,
+                      phone: order.phone,
+                      total: formatBs(order.totalCents),
+                      paymentMethod: order.paymentMethod,
+                      slot: order.pickupSlot ? formatSlot(order.pickupSlot.startsAt, order.pickupSlot.endsAt, locale) : undefined,
+                      items: order.items.map((i) => ({ qty: i.qty, name: i.productName, size: i.size, student: i.studentName })),
+                    },
+                    locale,
+                  ),
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pressable flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 text-center text-[15px] font-semibold text-white"
+              >
+                <WhatsAppGlyph className="size-5 shrink-0" />
+                {t('order.sendWhatsApp')}
+              </a>
+              <p className="t-caption px-2 text-center text-ink-2">{t('order.sendWhatsAppHint')}</p>
+            </div>
+          )}
           <a
             href={clickToChat(settings.store.whatsapp, `${locale === 'en' ? 'Hi! About my order' : 'Hola, consulta sobre mi pedido'} ${order.code}`)}
             target="_blank"

@@ -1,6 +1,7 @@
 'use server';
 
 import { z } from 'zod';
+import { after } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { db } from '@/lib/db';
 import { run, ActionError } from '@/lib/action';
@@ -53,7 +54,7 @@ export async function resolveExchange(input: z.input<typeof schema>) {
     });
     await audit(user.id, `exchange.${d.status.toLowerCase()}`, 'ExchangeRequest', ex.id, { restock: d.restock });
     const locale = ex.orderItem.order.locale === 'en' ? 'en' : 'es';
-    void notifyOrder(ex.orderItem.orderId, 'exchange_update', { status: LABEL[d.status][locale], reason: d.resolution });
+    after(() => notifyOrder(ex.orderItem.orderId, 'exchange_update', { status: LABEL[d.status][locale], reason: d.resolution }));
     if (d.restock) revalidateCatalog();
     revalidatePath('/[locale]/admin/exchanges', 'page');
     return null;

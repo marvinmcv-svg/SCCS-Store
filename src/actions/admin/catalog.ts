@@ -1,6 +1,7 @@
 'use server';
 
 import { z } from 'zod';
+import { after } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { db } from '@/lib/db';
 import { run, ActionError } from '@/lib/action';
@@ -247,7 +248,7 @@ export async function adjustStock(input: z.input<typeof adjustSchema>) {
       return { ...updated, before: row.stock };
     });
     await audit(user.id, 'stock.adjust', 'Variant', d.variantId, { delta: d.delta, reason: d.reason, sku: v.sku, after: v.stock });
-    if (v.before <= 0 && v.stock > 0) void notifyBackInStock(v.productId, v.id);
+    if (v.before <= 0 && v.stock > 0) after(() => notifyBackInStock(v.productId, v.id));
     revalidateCatalog();
     return { stock: v.stock };
   });
@@ -293,7 +294,7 @@ export async function importStockCsv(formData: FormData) {
       }
     }
     await audit(user.id, 'stock.import', 'Variant', null, { ok, errors: errors.length, file: file.name });
-    for (const r of restocked) void notifyBackInStock(r.productId, r.id);
+    for (const r of restocked) after(() => notifyBackInStock(r.productId, r.id));
     revalidateCatalog();
     return { ok, errors };
   });

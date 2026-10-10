@@ -49,7 +49,10 @@
     "installBody": "Quick access from your home screen, just like an app.",
     "install": "Install",
     "notNow": "Not now",
-    "share": "Share"
+    "share": "Share",
+    "switchToDark": "Turn on dark mode",
+    "switchToLight": "Turn on light mode",
+    "switchLanguage": "Cambiar a español"
   },
   "nav": {
     "home": "Home",
@@ -388,7 +391,9 @@
     "for": "For {name}",
     "preorder": "Pre-order · arrives around {date}",
     "cancelled": "This order was cancelled.",
-    "expired": "This order expired because payment wasn't received in time."
+    "expired": "This order expired because payment wasn't received in time.",
+    "sendWhatsApp": "Send order to the store on WhatsApp",
+    "sendWhatsAppHint": "Send your order details to the store's WhatsApp so they have it right away."
   },
   "favorites": {
     "title": "Favorites",
@@ -907,5 +912,33 @@
       "byMethod": "By payment method",
       "noData": "No data in this period."
     }
+  },
+  "marvin": {
+    "open": "Chat with Marvin, the virtual receptionist",
+    "title": "Marvin",
+    "subtitle": "Virtual receptionist · SCCS Store",
+    "greeting": "Hi! I'm Marvin, SCCS Store's virtual receptionist. I can help with products, sizes, grade kits, payments, pickup or your order status. How can I help?",
+    "placeholder": "Type your question…",
+    "send": "Send",
+    "thinking": "Marvin is typing…",
+    "error": "I couldn't answer. Please try again.",
+    "rateLimited": "Too many messages. Please wait a minute.",
+    "suggestions": [
+      "What's in the Grade 3 kit?",
+      "Which polo size for 130 cm?",
+      "How do I pay by QR?",
+      "Where do I pick up my order?"
+    ],
+    "disclaimer": "Marvin is an AI and can make mistakes. For your order, always check the order page.",
+    "human": "Talk to a person on WhatsApp",
+    "reset": "New conversation"
+  },
+  "whatsapp": {
+    "open": "Message us on WhatsApp",
+    "name": "SCCS Store",
+    "status": "Typically replies within the day",
+    "bubble": "Hi there! 👋 How can we help with uniforms, kits or your order?",
+    "start": "Start chat",
+    "prefill": "Hi SCCS Store, I have a question:"
   }
 }

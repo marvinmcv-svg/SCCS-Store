@@ -22,6 +22,11 @@ crisp product imagery, one accent (SCCS navy). See `docs/brand-and-scope.md`.
   exchanges, reports, users & roles, settings (bank details, QR image), audit log.
 - **Reliability**: 15-minute checkout stock holds, transactional stock decrement with row
   locks (no overselling, enforced by DB check constraints), idempotent order creation.
+- **Help**: Marvin, an AI receptionist (Claude) that answers from live catalog, stock, kits and
+  order status; the WhatsApp chat widget (+591 77165787); dark mode and ES/EN switches in the header.
+- **WhatsApp**: every new order is sent to the store's WhatsApp with the full summary; families get
+  WhatsApp confirmations when their order is received, when their receipt arrives, when payment is
+  verified, and at pickup. The order page also has a one-tap "send order to the store" button.
 - **Privacy**: students are minors — first name, grade, section, fit and sizes only.
 
 ## Stack
@@ -66,7 +71,9 @@ Promo code for testing: `BIENVENIDO10`.
 | `STORAGE_DRIVER` | – | `s3` \| `db` \| `local`. Default: S3 if keys set, `db` on Vercel, else local disk |
 | `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` | – | S3-compatible storage (Railway Buckets, R2, Supabase, AWS) |
 | `RESEND_API_KEY`, `EMAIL_FROM` | – | Transactional email. Without a key, emails are logged |
-| `WHATSAPP_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID` | – | WhatsApp Cloud API. Without them, admins get one-tap click-to-chat links |
+| `ANTHROPIC_API_KEY` | – | Turns on Marvin, the AI receptionist. Without it Marvin replies with a WhatsApp link |
+| `WHATSAPP_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID` | – | WhatsApp Cloud API: sends order/payment messages automatically. Without them, admins get one-tap click-to-chat links |
+| `WHATSAPP_TEMPLATE_MODE` | – | `1` to send Meta-approved templates (needed outside the 24-hour chat window). Template names = ids in `src/lib/notify/templates.ts` plus `store_new_order`, `store_alert` |
 | `CRON_SECRET` | – | Protects `/api/cron/expire` (Vercel Cron sends it automatically) |
 | `SENTRY_DSN`, `NEXT_PUBLIC_SENTRY_DSN` | – | Error monitoring (off unless set) |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | – | Cookieless analytics (off unless set) |

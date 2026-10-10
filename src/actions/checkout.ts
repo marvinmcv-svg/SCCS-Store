@@ -1,13 +1,13 @@
 'use server';
 
 import { z } from 'zod';
+import { after } from 'next/server';
 import { run, ActionError } from '@/lib/action';
 import { findCart } from '@/lib/cart';
 import { getCurrentUser } from '@/lib/session';
 import { enforceRateLimit } from '@/lib/rate-limit';
 import { holdCart, createOrderFromCart } from '@/lib/orders';
-import { notifyOrder, notifyStaff } from '@/lib/notify';
-import { formatBs } from '@/lib/money';
+import { notifyOrder, notifyStoreNewOrder } from '@/lib/notify';
 
 /** Called when the checkout page opens (and when the hold timer runs out). */
 export async function startCheckout() {
@@ -64,9 +64,9 @@ export async function placeOrder(input: z.input<typeof schema>) {
       idempotencyKey: d.idempotencyKey,
       locale: d.locale,
     });
-    // Fire-and-forget: notifications must never block the confirmation.
-    void notifyOrder(order.id, 'order_received');
-    void notifyStaff(`Nuevo pedido ${order.code}`, [`${order.name} · ${formatBs(order.totalCents)} · ${order.paymentMethod}`], `/admin/orders/${order.id}`);
+    // Sent after the response (kept alive by after()); never blocks or fails the order.
+    after(() => notifyOrder(order.id, 'order_received'));
+    after(() => notifyStoreNewOrder(order.id));
     return { code: order.code, token: order.pickupToken };
   });
 }

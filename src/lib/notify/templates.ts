@@ -5,6 +5,7 @@
  */
 export type TemplateId =
   | 'order_received'
+  | 'payment_received'
   | 'payment_verified'
   | 'payment_rejected'
   | 'order_preparing'
@@ -51,6 +52,10 @@ export function render(id: TemplateId, locale: string, v: TemplateVars): Out {
             cta: 'View my order',
             whatsapp: `SCCS Store: we received your order ${v.code} (${v.total}). Track it here: ${v.url}`,
           };
+    case 'payment_received':
+      return es
+        ? { subject: `Recibimos su pago · ${v.code}`, title: 'Recibimos su comprobante de pago', body: `${hi} recibimos el comprobante de pago de su pedido <b>${v.code}</b> por <b>${v.total}</b>. Lo verificaremos en horario escolar y le confirmaremos por WhatsApp.`, cta: 'Ver mi pedido', whatsapp: `SCCS Store: recibimos su comprobante de pago del pedido ${v.code} (${v.total}). Lo verificamos y le confirmamos en breve. ${v.url}` }
+        : { subject: `Payment received · ${v.code}`, title: 'We received your payment receipt', body: `${hi} we received the payment receipt for order <b>${v.code}</b> (<b>${v.total}</b>). We'll verify it during school hours and confirm on WhatsApp.`, cta: 'View my order', whatsapp: `SCCS Store: we received your payment receipt for order ${v.code} (${v.total}). We'll verify it and confirm shortly. ${v.url}` };
     case 'payment_verified':
       return es
         ? { subject: `Pago verificado · ${v.code}`, title: 'Pago verificado', body: `${hi} confirmamos el pago de su pedido <b>${v.code}</b>. Le avisaremos cuando esté listo para recoger.`, cta: 'Ver mi pedido', whatsapp: `SCCS Store: confirmamos el pago de su pedido ${v.code}. Le avisaremos cuando esté listo. ${v.url}` }
@@ -68,6 +73,10 @@ export function render(id: TemplateId, locale: string, v: TemplateVars): Out {
         ? { subject: `Listo para recoger · ${v.code}`, title: '¡Su pedido está listo!', body: `${hi} su pedido <b>${v.code}</b> está listo para recoger en ${v.location}${v.slot ? `, ${v.slot}` : ''}. Presente el código QR del enlace.`, cta: 'Ver código QR', whatsapp: `SCCS Store: ¡su pedido ${v.code} está listo! Recójalo en ${v.location}${v.slot ? ` (${v.slot})` : ''} y muestre su QR: ${v.url}` }
         : { subject: `Ready for pickup · ${v.code}`, title: 'Your order is ready!', body: `${hi} order <b>${v.code}</b> is ready at the ${v.location}${v.slot ? `, ${v.slot}` : ''}. Show the QR code from the link.`, cta: 'Show QR code', whatsapp: `SCCS Store: your order ${v.code} is ready! Collect it at the ${v.location}${v.slot ? ` (${v.slot})` : ''} and show your QR: ${v.url}` };
     case 'picked_up':
+      if (v.method === 'CASH')
+        return es
+          ? { subject: `Pago recibido y pedido entregado · ${v.code}`, title: 'Pago recibido · pedido entregado', body: `${hi} recibimos su pago de <b>${v.total}</b> y entregamos su pedido <b>${v.code}</b>. ¡Gracias por comprar en SCCS Store!`, cta: 'Ver mi pedido', whatsapp: `SCCS Store: confirmamos su pago de ${v.total} y entregamos su pedido ${v.code}. ¡Gracias!` }
+          : { subject: `Payment received, order collected · ${v.code}`, title: 'Payment received · order collected', body: `${hi} we received your payment of <b>${v.total}</b> and order <b>${v.code}</b> has been collected. Thank you for shopping at SCCS Store!`, cta: 'View my order', whatsapp: `SCCS Store: payment of ${v.total} confirmed and order ${v.code} collected. Thank you!` };
       return es
         ? { subject: `Pedido entregado · ${v.code}`, title: 'Pedido entregado', body: `${hi} entregamos su pedido <b>${v.code}</b>. ¡Gracias por comprar en SCCS Store!`, cta: 'Ver mi pedido', whatsapp: `SCCS Store: entregamos su pedido ${v.code}. ¡Gracias!` }
         : { subject: `Order collected · ${v.code}`, title: 'Order collected', body: `${hi} order <b>${v.code}</b> has been collected. Thank you for shopping at SCCS Store!`, cta: 'View my order', whatsapp: `SCCS Store: order ${v.code} collected. Thank you!` };
@@ -85,4 +94,29 @@ export function render(id: TemplateId, locale: string, v: TemplateVars): Out {
         ? { subject: `¡Volvió! ${v.product}`, title: 'Volvió a estar disponible', body: `${v.product} ya está disponible en SCCS Store.`, cta: 'Comprar ahora', whatsapp: `SCCS Store: ${v.product} volvió a estar disponible. ${v.url}` }
         : { subject: `Back in stock: ${v.product}`, title: "It's back", body: `${v.product} is available again at SCCS Store.`, cta: 'Shop now', whatsapp: `SCCS Store: ${v.product} is back in stock. ${v.url}` };
   }
+}
+
+const METHOD: Record<string, { es: string; en: string }> = {
+  QR: { es: 'QR bancario', en: 'Bank QR' },
+  TRANSFER: { es: 'Transferencia', en: 'Bank transfer' },
+  CASH: { es: 'Pago en el colegio', en: 'Pay at school' },
+  CARD: { es: 'Tarjeta', en: 'Card' },
+};
+
+/** Plain-text order summary for WhatsApp (store alert and click-to-chat). */
+export function orderSummaryText(
+  o: { code: string; name: string; phone: string; total: string; paymentMethod: string; slot?: string; items: { qty: number; name: string; size: string; student?: string | null }[]; url?: string },
+  locale: string,
+) {
+  const es = locale !== 'en';
+  const lines = [
+    es ? `🛍️ Nuevo pedido ${o.code}` : `🛍️ New order ${o.code}`,
+    `${es ? 'Cliente' : 'Customer'}: ${o.name} · +591 ${o.phone}`,
+    ...o.items.map((i) => `• ${i.qty}× ${i.name} (${i.size})${i.student ? ` – ${i.student}` : ''}`),
+    `${es ? 'Total' : 'Total'}: ${o.total}`,
+    `${es ? 'Pago' : 'Payment'}: ${METHOD[o.paymentMethod]?.[es ? 'es' : 'en'] ?? o.paymentMethod}`,
+  ];
+  if (o.slot) lines.push(`${es ? 'Recojo' : 'Pickup'}: ${o.slot}`);
+  if (o.url) lines.push(o.url);
+  return lines.join('\n');
 }

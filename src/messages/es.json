@@ -49,7 +49,10 @@
     "installBody": "Acceso rápido desde su pantalla de inicio, como una app.",
     "install": "Instalar",
     "notNow": "Ahora no",
-    "share": "Compartir"
+    "share": "Compartir",
+    "switchToDark": "Activar modo oscuro",
+    "switchToLight": "Activar modo claro",
+    "switchLanguage": "Switch to English"
   },
   "nav": {
     "home": "Inicio",
@@ -388,7 +391,9 @@
     "for": "Para {name}",
     "preorder": "Reserva · llega aprox. {date}",
     "cancelled": "Este pedido fue cancelado.",
-    "expired": "Este pedido venció porque no se recibió el pago a tiempo."
+    "expired": "Este pedido venció porque no se recibió el pago a tiempo.",
+    "sendWhatsApp": "Enviar pedido a la tienda por WhatsApp",
+    "sendWhatsAppHint": "Envíe el detalle del pedido al WhatsApp de la tienda para que lo tengan al instante."
   },
   "favorites": {
     "title": "Favoritos",
@@ -907,5 +912,33 @@
       "byMethod": "Por método de pago",
       "noData": "Sin datos en este período."
     }
+  },
+  "marvin": {
+    "open": "Hablar con Marvin, el recepcionista virtual",
+    "title": "Marvin",
+    "subtitle": "Recepcionista virtual · SCCS Store",
+    "greeting": "¡Hola! Soy Marvin, el recepcionista virtual de SCCS Store. Puedo ayudarle con productos, tallas, kits por grado, pagos, recojo o el estado de su pedido. ¿En qué le ayudo?",
+    "placeholder": "Escriba su pregunta…",
+    "send": "Enviar",
+    "thinking": "Marvin está escribiendo…",
+    "error": "No pude responder. Intente de nuevo.",
+    "rateLimited": "Demasiados mensajes. Espere un minuto, por favor.",
+    "suggestions": [
+      "¿Qué incluye el kit de 3° grado?",
+      "¿Qué talla de polo para 130 cm?",
+      "¿Cómo pago con QR?",
+      "¿Dónde recojo mi pedido?"
+    ],
+    "disclaimer": "Marvin es una IA y puede equivocarse. Para su pedido, revise siempre la página del pedido.",
+    "human": "Hablar con una persona por WhatsApp",
+    "reset": "Nueva conversación"
+  },
+  "whatsapp": {
+    "open": "Escríbanos por WhatsApp",
+    "name": "SCCS Store",
+    "status": "Normalmente responde en el día",
+    "bubble": "¡Hola! 👋 ¿En qué podemos ayudarle con uniformes, kits o su pedido?",
+    "start": "Iniciar chat",
+    "prefill": "Hola SCCS Store, tengo una consulta:"
   }
 }

@@ -5,7 +5,7 @@ import { formatDate, formatSlot } from '@/lib/dates';
 import { getSettings, pickupLocation } from '@/lib/settings';
 import { sendEmail, emailLayout } from './email';
 import { sendWhatsApp } from './whatsapp';
-import { render, type TemplateId } from './templates';
+import { render, orderSummaryText, type TemplateId } from './templates';
 
 export const siteUrl = () => (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
 
@@ -91,18 +91,73 @@ export async function notifyBackInStock(productId: string, variantId: string | n
   }
 }
 
-/** Heads-up to the store inbox (new order, new receipt). Never throws. */
-export async function notifyStaff(subject: string, lines: string[], path: string) {
+/** WhatsApp to the store's own number. Logged so staff can see if it failed. */
+async function whatsappStore(text: string, template: string, orderId?: string) {
+  const settings = await getSettings();
+  const to = settings.store.whatsapp;
+  const r = await sendWhatsApp(to, text, { name: template, lang: 'es', params: [text.slice(0, 900)] });
+  await db.notification.create({
+    data: {
+      orderId: orderId ?? null,
+      channel: 'WHATSAPP',
+      to,
+      template,
+      status: r.mode === 'link' ? 'LINK' : r.ok ? 'SENT' : 'FAILED',
+      link: 'link' in r ? r.link : null,
+      error: 'error' in r ? r.error : null,
+    },
+  });
+}
+
+/** Heads-up to the store (email + WhatsApp): new receipt, exchange request. Never throws. */
+export async function notifyStaff(subject: string, lines: string[], path: string, orderId?: string) {
   try {
     const settings = await getSettings();
     const url = `${siteUrl()}${path}`;
-    await sendEmail({
-      to: settings.store.storeEmail,
-      subject: `[SCCS Store] ${subject}`,
-      text: `${lines.join('\n')}\n\n${url}`,
-      html: emailLayout({ title: subject, body: lines.join('<br/>'), cta: { label: 'Abrir en el portal', url } }),
-    });
+    await Promise.allSettled([
+      sendEmail({
+        to: settings.store.storeEmail,
+        subject: `[SCCS Store] ${subject}`,
+        text: `${lines.join('\n')}\n\n${url}`,
+        html: emailLayout({ title: subject, body: lines.join('<br/>'), cta: { label: 'Abrir en el portal', url } }),
+      }),
+      whatsappStore(`SCCS Store · ${subject}\n${lines.join('\n')}\n${url}`, 'store_alert', orderId),
+    ]);
   } catch (e) {
     console.error('[notify] staff failed', e);
+  }
+}
+
+/** Every new order reaches the store: full summary by WhatsApp + email. Never throws. */
+export async function notifyStoreNewOrder(orderId: string) {
+  try {
+    const order = await db.order.findUnique({ where: { id: orderId }, include: { items: true, pickupSlot: true } });
+    if (!order) return;
+    const settings = await getSettings();
+    const url = `${siteUrl()}/admin/orders/${order.id}`;
+    const text = orderSummaryText(
+      {
+        code: order.code,
+        name: order.name,
+        phone: order.phone,
+        total: formatBs(order.totalCents),
+        paymentMethod: order.paymentMethod,
+        slot: order.pickupSlot ? formatSlot(order.pickupSlot.startsAt, order.pickupSlot.endsAt, 'es') : undefined,
+        items: order.items.map((i) => ({ qty: i.qty, name: i.productName, size: i.size, student: i.studentName })),
+        url,
+      },
+      'es',
+    );
+    await Promise.allSettled([
+      whatsappStore(text, 'store_new_order', order.id),
+      sendEmail({
+        to: settings.store.storeEmail,
+        subject: `[SCCS Store] Nuevo pedido ${order.code} · ${formatBs(order.totalCents)}`,
+        text,
+        html: emailLayout({ title: `Nuevo pedido ${order.code}`, body: text.split('\n').join('<br/>'), cta: { label: 'Abrir en el portal', url } }),
+      }),
+    ]);
+  } catch (e) {
+    console.error('[notify] store new order failed', e);
   }
 }

@@ -1,6 +1,7 @@
 'use server';
 
 import { z } from 'zod';
+import { after } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import type { OrderStatus } from '@prisma/client';
 import { db } from '@/lib/db';
@@ -31,7 +32,7 @@ export async function verifyPayment(orderId: string, proofId?: string) {
     });
     if (order.status === 'RECEIVED') await transitionOrder(orderId, 'PAYMENT_VERIFIED', user.id);
     await audit(user.id, 'payment.verify', 'Order', orderId, { proofId: proofId ?? null, code: order.code });
-    void notifyOrder(orderId, 'payment_verified');
+    after(() => notifyOrder(orderId, 'payment_verified'));
     refresh(orderId);
     return null;
   });
@@ -49,7 +50,7 @@ export async function rejectPayment(orderId: string, proofId: string, reason: st
       db.orderEvent.create({ data: { orderId, type: 'payment', note: `payment rejected · ${r}`, actorId: user.id } }),
     ]);
     await audit(user.id, 'payment.reject', 'Order', orderId, { proofId, reason: r, code: order.code });
-    void notifyOrder(orderId, 'payment_rejected', { reason: r });
+    after(() => notifyOrder(orderId, 'payment_rejected', { reason: r }));
     refresh(orderId);
     return null;
   });
@@ -64,7 +65,7 @@ export async function setOrderStatus(orderId: string, status: OrderStatus, note?
     await transitionOrder(orderId, to, user.id, note);
     await audit(user.id, 'order.status', 'Order', orderId, { from: before.status, to, code: before.code, note: note ?? null });
     const tpl = templateFor(to);
-    if (tpl) void notifyOrder(orderId, tpl, note ? { reason: note } : {});
+    if (tpl) after(() => notifyOrder(orderId, tpl, note ? { reason: note } : {}));
     refresh(orderId);
     return null;
   });
@@ -121,7 +122,7 @@ export async function confirmPickup(orderId: string) {
     if (order.paymentMethod !== 'CASH' && order.paymentStatus !== 'VERIFIED') throw new ActionError('INVALID_STATUS');
     await transitionOrder(orderId, 'PICKED_UP', user.id, 'pickup via QR');
     await audit(user.id, 'order.pickup', 'Order', orderId, { code: order.code, cash: order.paymentMethod === 'CASH' });
-    void notifyOrder(orderId, 'picked_up');
+    after(() => notifyOrder(orderId, 'picked_up'));
     refresh(orderId);
     return null;
   });

@@ -13,15 +13,18 @@ import { AnnouncementBar } from '@/components/store/announcement-bar';
 import { BagDrawer } from '@/components/store/bag-drawer';
 import { Pwa } from '@/components/store/pwa';
 import { Analytics } from '@/components/analytics';
+import { HelpWidgets } from '@/components/store/help-widgets';
+import { getSettings } from '@/lib/settings';
 
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
-  const [locale, t, user, count, ownerKey, content] = await Promise.all([
+  const [locale, t, user, count, ownerKey, content, settings] = await Promise.all([
     getLocale(),
     getTranslations('common'),
     getCurrentUser(),
     getCartCount(),
     favoriteOwnerKey(),
     getHomeContent(),
+    getSettings(),
   ]);
   const [students, favorites] = await Promise.all([
     user ? db.student.findMany({ where: { parentId: user.id }, orderBy: { createdAt: 'asc' } }) : Promise.resolve([]),
@@ -47,6 +50,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
       <SiteFooter />
       <TabBar />
       <BagDrawer />
+      <HelpWidgets whatsapp={settings.store.whatsapp} />
       <Pwa />
       <Analytics />
     </StoreProvider>

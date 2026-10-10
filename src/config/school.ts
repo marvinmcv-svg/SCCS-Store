@@ -21,8 +21,8 @@ export const school = {
 
   /** PLACEHOLDER: dedicated store inbox. */
   storeEmail: 'tienda@sccs.edu.bo',
-  /** PLACEHOLDER: WhatsApp Business number, E.164 without "+". */
-  whatsapp: '59170000000',
+  /** Store WhatsApp (+591 77165787), E.164 without "+". Overridable in Admin → Settings. */
+  whatsapp: '59177165787',
 
   /** PLACEHOLDER: where families collect orders. */
   pickupLocation: {

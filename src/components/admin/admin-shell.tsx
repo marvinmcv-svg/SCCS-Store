@@ -6,7 +6,7 @@ import { Link, usePathname } from '@/i18n/navigation';
 import { SideDrawer } from '@/components/ui/drawer';
 import { cn } from '@/lib/utils';
 import { CrestMark } from '@/components/ui/icons';
-import { LocaleSwitcher, ThemeSwitcher } from '@/components/store/locale-theme';
+import { LocaleSwitcher, LocaleToggle, ThemeSwitcher, ThemeToggle } from '@/components/store/locale-theme';
 
 export type NavItem = { href: string; key: string; icon: string; badge?: number };
 
@@ -91,11 +91,15 @@ export function AdminShell({ items, user, children }: { items: NavItem[]; user: 
             <CrestMark className="h-7 text-accent" />
             <span className="text-[15px] font-semibold">{t('title')}</span>
           </Link>
-          <button type="button" onClick={() => setOpen(true)} className="pressable grid size-11 place-items-center rounded-full hover:bg-bg-subtle" aria-label={t('menu')}>
-            <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-          </button>
+          <div className="flex items-center">
+            <LocaleToggle />
+            <ThemeToggle />
+            <button type="button" onClick={() => setOpen(true)} className="pressable grid size-11 place-items-center rounded-full hover:bg-bg-subtle" aria-label={t('menu')}>
+              <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+            </button>
+          </div>
         </header>
         <main id="main" className="px-4 py-6 md:px-10 md:py-10">
           {children}

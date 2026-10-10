@@ -7,6 +7,7 @@ import { BagIcon, HeartIcon, ShopIcon, UserIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/utils';
 import { Logo } from './logo';
 import { useStore } from './store-provider';
+import { LocaleToggle, ThemeToggle } from './locale-theme';
 
 const NAV = [
   { href: '/shop', key: 'all' },
@@ -86,6 +87,8 @@ export function SiteHeader() {
           </ul>
         </nav>
         <div className="ml-auto flex items-center md:ml-0">
+          <LocaleToggle />
+          <ThemeToggle />
           <Link href="/search" className={icon} aria-label={t('nav.search')}>
             <ShopIcon className="size-[22px]" />
           </Link>
